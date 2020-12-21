@@ -1,0 +1,32 @@
+﻿@font-face {
+    font-family: 'Iransans';
+    src: url(/fonts/IranSans/IRANSansWebFaNum.eot) format('embedded-opentype'), 
+         url(/fonts/IranSans/IRANSansWebFaNum.woff2) format('woff2'),
+         url(/fonts/IranSans/IRANSansWebFaNum.woff) format('woff'), 
+         url(/fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
+}
+
+
+body {
+    font-family: Iransans;
+}
+
+h1, h2, h3, h4, h5, h6, a, span, label, p {
+    font-family: Iransans;
+}
+
+.carousel-item {
+    cursor: pointer;
+}
+
+.product_price del{
+    display: block;
+}
+
+.product_info {
+    text-align: center;
+}
+
+.bg-blue {
+    background-color: #F4F9FC;
+}
