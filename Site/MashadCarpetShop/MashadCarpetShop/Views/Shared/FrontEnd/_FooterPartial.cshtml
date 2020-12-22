@@ -1,0 +1,91 @@
+﻿@model ViewModels._BaseViewModel
+
+<footer class="footer_dark">
+	<div class="footer_top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12">
+					<div class="widget">
+						<h6 class="widget_title">اطلاعات تماس</h6>
+						<ul class="contact_info contact_info_light">
+							<li>
+								<i class="ti-location-pin"></i>
+
+								<p>@Model.Address</p>
+							</li>
+							<li>
+								<i class="ti-email"></i>
+								<a href="mailto:@Model.Email">@Model.Email</a>
+							</li>
+							<li>
+								<i class="ti-mobile"></i>
+								<p>@Model.Phone</p>
+							</li>
+						</ul>
+					</div>
+					<div class="widget">
+						<ul class="social_icons rounded_social">
+							<li><a href="@Model.Telegram" target="_blank" rel="nofollow" class="sc_telegram"><img src="~/assets/images/telegramicon.png" /> </a></li>
+							<li><a href="@Model.Aparat" target="_blank" rel="nofollow" class="sc_aparat"><img src="~/assets/images/aparaticon.png" /> </a></li>
+							<li><a href="@Model.Youtube" target="_blank" rel="nofollow" class="sc_youtube"><i class="ion-social-youtube-outline"></i></a></li>
+							<li><a href="@Model.Instagram" target="_blank" rel="nofollow" class="sc_instagram"><i class="ion-social-instagram-outline"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-6">
+					<div class="widget">
+						<h6 class="widget_title">لینک های مفید</h6>
+						<ul class="widget_links">
+							<li><a href="/about">درباره ما</a></li>
+							<li><a href="/brand">برندها</a></li>
+							<li><a href="/contact">تماس با ما</a></li>
+							<li><a href="/blog">اخبار و مقالات</a></li>
+							<li><a href="/category">محصولات</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-6">
+					<div class="widget">
+						<h6 class="widget_title">حساب کاربری</h6>
+						<ul class="widget_links">
+							<li><a href="/dashboard">پروفایل کاربری</a></li>
+							<li><a href="/dashboard/order">لیست سفارشات</a></li>
+							<li><a href="/dashboard/editprofile">ویرایش پروفایل</a></li>
+							<li><a href="#">شرایط و قوانین</a></li>
+							<li><a href="#">حریم خصوصی</a></li>
+
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<div class="widget">
+						<h6 class="widget_title">گواهینامه ها</h6>
+
+						<div class="newsletter_form rounded_input">
+							<a href="https://trustseal.enamad.ir/?id=20285&code=5iZrLDwuj39X#ubNpXtE" target="_blank" rel="nofollow">
+								<img src="~/assets/images/namad2.jpg" alt="اینماد" width="150px"/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bottom_footer border-top-tran">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="mb-md-0 text-center text-md-left">تمامی حقوق این وب سایت مطعلق به مجموعه رنگ خوشدست می باشد. طراحی سایت <a href="https://zavoshsoftware.com/">زاوش</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+<div class="whatsappicon moving-div">
+	<a href="https://api.whatsapp.com/send?phone=989012221418&text=سلام و وقت بخیر">
+		<img src="~/assets/images/whatssapp.png" />
+	</a>
+</div>
+<a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>

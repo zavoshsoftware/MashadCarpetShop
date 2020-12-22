@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\Kendo.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -784,6 +790,12 @@
     <Content Include="fonts\fontAwesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\AdminJS\app.v2.js" />
+    <Content Include="Scripts\AdminJS\app.v2.min.js" />
+    <Content Include="Scripts\AdminJS\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\AdminJS\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\AdminJS\landing.js" />
+    <Content Include="Scripts\AdminJS\landing.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
@@ -918,16 +930,69 @@
     <Content Include="Scripts\kendo\2017.3.913\kendo.webcomponents.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\pako_deflate.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BlogCommentsController.cs" />
+    <Compile Include="Controllers\BlogGroupsController.cs" />
+    <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\ColorsController.cs" />
+    <Compile Include="Controllers\ContactUsFormsController.cs" />
+    <Compile Include="Controllers\DiscountCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageBrowserController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductCommentsController.cs" />
+    <Compile Include="Controllers\ProductGroupsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductSizesController.cs" />
+    <Compile Include="Controllers\SizesController.cs" />
+    <Compile Include="Controllers\SlidersController.cs" />
+    <Compile Include="Controllers\TextItemsController.cs" />
+    <Compile Include="Controllers\TextItemTypesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CodeGenerator.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Migrations\202012221601343_V01.cs" />
+    <Compile Include="Migrations\202012221601343_V01.Designer.cs">
+      <DependentUpon>202012221601343_V01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\DatabaseContextInitializer.cs" />
+    <Compile Include="Models\DatabaseContextInitializerBeforeTheFirstRelease.cs" />
+    <Compile Include="Models\Entities\BaseEntity.cs" />
+    <Compile Include="Models\Entities\Blog.cs" />
+    <Compile Include="Models\Entities\BlogComment.cs" />
+    <Compile Include="Models\Entities\BlogGroup.cs" />
+    <Compile Include="Models\Entities\City.cs" />
+    <Compile Include="Models\Entities\Payment.cs" />
+    <Compile Include="Models\Entities\PaymentUniqeCode.cs" />
+    <Compile Include="Models\Entities\ProductSize.cs" />
+    <Compile Include="Models\Entities\Size.cs" />
+    <Compile Include="Models\Entities\Color.cs" />
+    <Compile Include="Models\Entities\ContactUsForm.cs" />
+    <Compile Include="Models\Entities\DiscountCode.cs" />
+    <Compile Include="Models\Entities\Gender.cs" />
+    <Compile Include="Models\Entities\Order.cs" />
+    <Compile Include="Models\Entities\OrderDetail.cs" />
+    <Compile Include="Models\Entities\OrderStatus.cs" />
+    <Compile Include="Models\Entities\Product.cs" />
+    <Compile Include="Models\Entities\ProductComment.cs" />
+    <Compile Include="Models\Entities\ProductGroup.cs" />
+    <Compile Include="Models\Entities\Province.cs" />
+    <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\Slider.cs" />
+    <Compile Include="Models\Entities\TextItem.cs" />
+    <Compile Include="Models\Entities\TextItemType.cs" />
+    <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1279,6 +1344,108 @@
     <Content Include="Scripts\kendo\2017.3.913\kendo.virtuallist.min.js.map" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.window.min.js.map" />
+    <Content Include="Views\Shared\BackEndLayout\_BackEndLayout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RichText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RichText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\FrontEnd\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\FrontEnd\_FronEndLayout.cshtml" />
+    <Content Include="Views\Shared\FrontEnd\_MenuPartial.cshtml" />
+    <Content Include="Views\Shared\_CustomerDashboardMenuPartial.cshtml" />
+    <Content Include="Views\BlogComments\Create.cshtml" />
+    <Content Include="Views\BlogComments\Delete.cshtml" />
+    <Content Include="Views\BlogComments\Details.cshtml" />
+    <Content Include="Views\BlogComments\Edit.cshtml" />
+    <Content Include="Views\BlogComments\Index.cshtml" />
+    <Content Include="Views\BlogGroups\Create.cshtml" />
+    <Content Include="Views\BlogGroups\Delete.cshtml" />
+    <Content Include="Views\BlogGroups\Edit.cshtml" />
+    <Content Include="Views\BlogGroups\Index.cshtml" />
+    <Content Include="Views\Blogs\Create.cshtml" />
+    <Content Include="Views\Blogs\Delete.cshtml" />
+    <Content Include="Views\Blogs\Details.cshtml" />
+    <Content Include="Views\Blogs\Edit.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Blogs\List.cshtml" />
+    <Content Include="Views\Blogs\ListByGroup.cshtml" />
+    <Content Include="Views\ContactUsForms\Create.cshtml" />
+    <Content Include="Views\ContactUsForms\Delete.cshtml" />
+    <Content Include="Views\ContactUsForms\Details.cshtml" />
+    <Content Include="Views\ContactUsForms\Edit.cshtml" />
+    <Content Include="Views\ContactUsForms\Index.cshtml" />
+    <Content Include="Views\DiscountCodes\Create.cshtml" />
+    <Content Include="Views\DiscountCodes\Delete.cshtml" />
+    <Content Include="Views\DiscountCodes\Details.cshtml" />
+    <Content Include="Views\DiscountCodes\Edit.cshtml" />
+    <Content Include="Views\DiscountCodes\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\ProductComments\Create.cshtml" />
+    <Content Include="Views\ProductComments\Delete.cshtml" />
+    <Content Include="Views\ProductComments\Details.cshtml" />
+    <Content Include="Views\ProductComments\Edit.cshtml" />
+    <Content Include="Views\ProductComments\Index.cshtml" />
+    <Content Include="Views\Sliders\Create.cshtml" />
+    <Content Include="Views\Sliders\Delete.cshtml" />
+    <Content Include="Views\Sliders\Details.cshtml" />
+    <Content Include="Views\Sliders\Edit.cshtml" />
+    <Content Include="Views\Sliders\Index.cshtml" />
+    <Content Include="Views\TextItems\Create.cshtml" />
+    <Content Include="Views\TextItems\Delete.cshtml" />
+    <Content Include="Views\TextItems\Details.cshtml" />
+    <Content Include="Views\TextItems\Edit.cshtml" />
+    <Content Include="Views\TextItems\Index.cshtml" />
+    <Content Include="Views\TextItemTypes\Create.cshtml" />
+    <Content Include="Views\TextItemTypes\Delete.cshtml" />
+    <Content Include="Views\TextItemTypes\Details.cshtml" />
+    <Content Include="Views\TextItemTypes\Edit.cshtml" />
+    <Content Include="Views\TextItemTypes\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\ProductGroups\Create.cshtml" />
+    <Content Include="Views\ProductGroups\Delete.cshtml" />
+    <Content Include="Views\ProductGroups\Details.cshtml" />
+    <Content Include="Views\ProductGroups\Edit.cshtml" />
+    <Content Include="Views\ProductGroups\Index.cshtml" />
+    <Content Include="Uploads\sample-excel.xls" />
+    <Content Include="Views\Colors\Create.cshtml" />
+    <Content Include="Views\Colors\Delete.cshtml" />
+    <Content Include="Views\Colors\Details.cshtml" />
+    <Content Include="Views\Colors\Edit.cshtml" />
+    <Content Include="Views\Colors\Index.cshtml" />
+    <Content Include="Views\Sizes\Create.cshtml" />
+    <Content Include="Views\Sizes\Delete.cshtml" />
+    <Content Include="Views\Sizes\Details.cshtml" />
+    <Content Include="Views\Sizes\Edit.cshtml" />
+    <Content Include="Views\Sizes\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\ProductSizes\Create.cshtml" />
+    <Content Include="Views\ProductSizes\Delete.cshtml" />
+    <Content Include="Views\ProductSizes\Details.cshtml" />
+    <Content Include="Views\ProductSizes\Edit.cshtml" />
+    <Content Include="Views\ProductSizes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1288,7 +1455,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Uploads\Blog\" />
+    <Folder Include="Uploads\Editor\" />
+    <Folder Include="Uploads\ProductGroup\" />
+    <Folder Include="Uploads\Product\" />
+    <Folder Include="Uploads\Slider\" />
+    <Folder Include="Uploads\text\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{5a953722-4f44-4c82-ad65-bb5bd34259f9}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012221601343_V01.resx">
+      <DependentUpon>202012221601343_V01.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
