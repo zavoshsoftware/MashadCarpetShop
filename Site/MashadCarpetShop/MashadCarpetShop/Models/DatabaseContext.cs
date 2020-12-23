@@ -42,5 +42,6 @@ namespace Models
         public DbSet<Payment> Payments { get; set; }
 
         public System.Data.Entity.DbSet<Models.TextItemType> TextItemTypes { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

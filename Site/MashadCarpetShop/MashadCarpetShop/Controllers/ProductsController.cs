@@ -9,36 +9,23 @@ using System.Web;
 using System.Web.Mvc;
 using Helpers;
 using Models;
+using ViewModels;
 
 namespace MashadCarpetShop.Controllers
 {
     public class ProductsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
+        CodeGenerator codeGenerator = new CodeGenerator();
 
-        // GET: Products
+        #region CRUD
+
         public ActionResult Index()
         {
             var products = db.Products.Where(p => p.ParentId != null && p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
             return View(products.ToList());
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // GET: Products/Create
         public ActionResult Create()
         {
             ViewBag.ColorId = new SelectList(db.Colors, "Id", "Title");
@@ -46,7 +33,6 @@ namespace MashadCarpetShop.Controllers
             ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Code");
             return View();
         }
-        CodeGenerator codeGenerator = new CodeGenerator();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -69,7 +55,9 @@ namespace MashadCarpetShop.Controllers
                 }
                 #endregion
                 Guid? parentId = GetParentIdByDesignNoAndColor(product.DesignNo);
+                string colorTitle = db.Colors.Find(product.ColorId).Title;
 
+                product.Title = "طرح " + product.DesignNo + " رنگ " + colorTitle;
                 product.IsDeleted = false;
                 product.CreationDate = DateTime.Now;
                 product.Code = codeGenerator.ReturnProductCode();
@@ -159,7 +147,7 @@ namespace MashadCarpetShop.Controllers
 
             return View(product);
         }
-         
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product product, HttpPostedFileBase fileupload)
@@ -201,7 +189,6 @@ namespace MashadCarpetShop.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -216,7 +203,6 @@ namespace MashadCarpetShop.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
@@ -237,5 +223,169 @@ namespace MashadCarpetShop.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
+        [Route("carpet-online-shopping/{urlParam}")]
+        public ActionResult List(string urlParam)
+        {
+            var productGroup = db.ProductGroups.Where(c => c.UrlParam == urlParam).Select(c => new
+            {
+                c.Title,
+                c.Id,
+                c.UrlParam
+            }).FirstOrDefault();
+
+            if (productGroup == null)
+                return Redirect("/carpet-online-shopping");
+
+            List<Product> products = db.Products.Where(c =>
+                    c.ProductGroupId == productGroup.Id && c.ParentId != null && c.IsDeleted == false && c.IsActive)
+                .ToList();
+
+            ProductListViewModel result = new ProductListViewModel()
+            {
+                ProductGroupTitle = productGroup.Title,
+
+                ProductGroupUrlParam = productGroup.UrlParam,
+
+                Products = GetProductCardByProducts(products)
+            };
+
+            return View(result);
+        }
+
+        public List<ProductCardViewModel> GetProductCardByProducts(List<Product> products)
+        {
+            List<ProductCardViewModel> productCard = new List<ProductCardViewModel>();
+
+            foreach (Product product in products)
+            {
+                var sizes = db.ProductSizes.Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive)
+                    .ToList();
+
+                List<string> productSizes = new List<string>();
+
+                foreach (ProductSize productSize in sizes)
+                {
+                    productSizes.Add(productSize.Size.Title);
+                }
+
+                productCard.Add(new ProductCardViewModel()
+                {
+                    Product = product,
+                    Sizes = productSizes
+                });
+            }
+
+            return productCard;
+        }
+
+        [Route("carpet-online-shopping/{groupUrlParam}/{code:int}")]
+        public ActionResult Details(string groupUrlParam, int code, Guid? productSizeId)
+        {
+
+            ProductSize productSize = new ProductSize();
+            Product product = db.Products.FirstOrDefault(c => c.Code == code && c.IsDeleted == false);
+
+            if (product == null)
+                return Redirect("/carpet-online-shopping");
+
+
+            if (productSizeId == null)
+            {
+                productSize =
+                    db.ProductSizes.FirstOrDefault(c => c.ProductId == product.Id && c.Amount == product.Amount);
+            }
+            else
+            {
+                productSize =
+                    db.ProductSizes.FirstOrDefault(c => c.Id==productSizeId.Value);
+            }
+          
+            ProductDetailViewModel result = new ProductDetailViewModel()
+            {
+                ProductSize = productSize,
+
+                ProductComments =
+                    db.ProductComments.Where(c => c.ProductId == product.Id && c.IsActive && c.IsDeleted == false)
+                        .ToList(),
+
+                RelatedProducts = GetProductCardByProducts(db.Products.Where(c =>
+                    c.ProductGroupId == product.ProductGroupId && c.ParentId != product.ParentId &&
+                    c.IsDeleted == false && c.IsActive).Take(7).ToList()),
+
+                ProductSizes = GetProductSizes(product, productSizeId),
+
+                ProductColors = GetProductColors(product),
+
+                ProductImages = db.ProductImages.Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive).ToList()
+            };
+
+            return View(result);
+        }
+
+        public List<ProductSizeViewModel> GetProductSizes(Product product, Guid? productSizeId)
+        {
+            var productSizes = db.ProductSizes
+                .Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive && c.Stock > 0).Select(c =>
+                    new
+                    {
+                        c.Id,
+                        c.Size.Title,
+                        c.Amount
+                    });
+
+            List<ProductSizeViewModel> sizes = new List<ProductSizeViewModel>();
+
+            foreach (var productSize in productSizes)
+            {
+                bool isActive = false;
+
+                if (productSizeId == null)
+                    isActive = productSize.Amount == product.Amount;
+                else
+                    isActive = productSize.Id == productSizeId;
+
+                sizes.Add(new ProductSizeViewModel()
+                {
+                    Id = productSize.Id,
+                    Title = productSize.Title,
+                    IsActive = isActive
+                });
+            }
+
+            return sizes;
+        }
+
+        public List<ProductColorViewModel> GetProductColors(Product product)
+        {
+            var products = db.Products
+                .Where(c => c.ParentId == product.ParentId && c.IsDeleted == false && c.IsActive).Select(c =>
+                    new
+                    {
+                        c.Id,
+                        c.Code,
+                        c.Color.HexCode,
+                        c.Color.Title
+                    });
+
+            List<ProductColorViewModel> colors = new List<ProductColorViewModel>();
+
+            foreach (var oProduct in products)
+            {
+                bool isActive = oProduct.Id == product.Id;
+
+                colors.Add(new ProductColorViewModel()
+                {
+                    IsActive = isActive,
+                    Title = oProduct.Title,
+                    Code = oProduct.Code,
+                    HexCode = oProduct.HexCode
+                });
+            }
+
+            return colors;
+        }
     }
 }
+

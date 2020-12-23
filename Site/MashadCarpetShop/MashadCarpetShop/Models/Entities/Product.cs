@@ -11,13 +11,14 @@ using System.Web.Mvc.Html;
 
 namespace Models
 {
-    public class Product:BaseEntity
+    public class Product : BaseEntity
     {
         public Product()
         {
-            ProductSizes=new List<ProductSize>();
+            ProductSizes = new List<ProductSize>();
             ProductComments = new List<ProductComment>();
-            Products=new List<Product>();
+            Products = new List<Product>();
+            ProductImages = new List<ProductImage>();
         }
         [Display(Name = "Order", ResourceType = typeof(Resources.Models.Product))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -27,7 +28,6 @@ namespace Models
         public int Code { get; set; }
 
         [Display(Name = "Title", ResourceType = typeof(Resources.Models.Product))]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         [StringLength(256, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         public string Title { get; set; }
 
@@ -47,13 +47,13 @@ namespace Models
         public Guid? ParentId { get; set; }
         public virtual Product Parent { get; set; }
 
-        [Display(Name="کد نقشه")]
+        [Display(Name = "کد نقشه")]
         public int DesignNo { get; set; }
 
-        [Display(Name="شانه")]
+        [Display(Name = "شانه")]
         public string Reeds { get; set; }
 
-        [Display(Name="تراکم")]
+        [Display(Name = "تراکم")]
         public string Shots { get; set; }
 
         [Display(Name = "تعداد رنگ")]
@@ -64,7 +64,7 @@ namespace Models
         [StringLength(500, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         public string PageTitle { get; set; }
 
-        [Display(Name = "تگ عنوان انگلیسی" )]
+        [Display(Name = "تگ عنوان انگلیسی")]
         [StringLength(500, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         public string PageTitleEn { get; set; }
 
@@ -101,7 +101,7 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public decimal Amount { get; set; }
 
-      
+
         [Display(Name = "DiscountAmount", ResourceType = typeof(Resources.Models.Product))]
         public decimal? DiscountAmount { get; set; }
 
@@ -112,25 +112,30 @@ namespace Models
         [Display(Name = "IsInHome", ResourceType = typeof(Resources.Models.Product))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInHome { get; set; }
-        
-      
+
+
 
         [Display(Name = "بازدید")]
         public int Visit { get; set; }
 
-     
+
         [Display(Name = "موجود است؟")]
         public bool IsAvailable { get; set; }
-        public virtual ICollection<ProductComment> ProductComments { get; set; } 
+
+        public virtual ICollection<ProductComment> ProductComments { get; set; }
 
         public virtual ICollection<ProductSize> ProductSizes { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
+
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
+
         internal class configuration : EntityTypeConfiguration<Product>
         {
             public configuration()
             {
-                 HasRequired(p => p.ProductGroup).WithMany(t => t.Products).HasForeignKey(p => p.ProductGroupId);
-                 HasRequired(p => p.Color).WithMany(t => t.Products).HasForeignKey(p => p.ColorId);
+                HasRequired(p => p.ProductGroup).WithMany(t => t.Products).HasForeignKey(p => p.ProductGroupId);
+                HasRequired(p => p.Color).WithMany(t => t.Products).HasForeignKey(p => p.ColorId);
             }
         }
 

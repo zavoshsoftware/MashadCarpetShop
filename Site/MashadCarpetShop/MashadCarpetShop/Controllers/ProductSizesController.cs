@@ -16,7 +16,7 @@ namespace MashadCarpetShop.Controllers
 
         public ActionResult Index(Guid id)
         {
-            var productSizes = db.ProductSizes.Include(p => p.Product).Where(p=>p.ProductId==id&& p.IsDeleted==false).OrderByDescending(p=>p.CreationDate);
+            var productSizes = db.ProductSizes.Include(p => p.Product).Where(p => p.ProductId == id && p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
             return View(productSizes.ToList());
         }
 
@@ -33,17 +33,19 @@ namespace MashadCarpetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-				productSize.IsDeleted=false;
-				productSize.CreationDate= DateTime.Now;
+                productSize.IsDeleted = false;
+                productSize.CreationDate = DateTime.Now;
                 productSize.ProductId = id;
                 productSize.Id = Guid.NewGuid();
                 productSize.SeedStock = productSize.Stock;
                 productSize.SellNumber = 0;
                 if (productSize.Stock > 0)
                     productSize.IsAvailable = true;
+
+                UpdateParentProductOnCreate(productSize);
                 db.ProductSizes.Add(productSize);
                 db.SaveChanges();
-                return RedirectToAction("Index",new{id=id});
+                return RedirectToAction("Index", new { id = id });
             }
 
             ViewBag.ProductId = id;
@@ -68,18 +70,58 @@ namespace MashadCarpetShop.Controllers
             return View(productSize);
         }
 
-      
+        public void UpdateParentProductOnCreate(ProductSize productSize)
+        {
+            Product product = db.Products.Find(productSize.ProductId);
+
+            if (product.Amount == 0 || product.Amount > productSize.Amount)
+            {
+
+                product.Amount = productSize.Amount;
+                product.DiscountAmount = productSize.DiscountAmount;
+                product.IsInPromotion = productSize.IsInPromotion;
+                product.LastModifiedDate = DateTime.Now;
+            }
+        }
+        public void UpdateParentProductOnEdit(ProductSize productSize)
+        {
+            Product product = db.Products.Find(productSize.ProductId);
+
+            var oProductSize = db.ProductSizes.Where(c => c.ProductId == productSize.ProductId&&c.Id!=productSize.Id).OrderBy(c => c.Amount)
+                .FirstOrDefault();
+
+            if (oProductSize != null)
+            {
+                if (oProductSize.Amount < productSize.Amount)
+                {
+                    product.Amount = oProductSize.Amount;
+                    product.DiscountAmount = oProductSize.DiscountAmount;
+                    product.IsInPromotion = oProductSize.IsInPromotion;
+                }
+                else
+                {
+                    product.Amount = productSize.Amount;
+                    product.DiscountAmount = productSize.DiscountAmount;
+                    product.IsInPromotion = productSize.IsInPromotion;
+                }
+                product.LastModifiedDate = DateTime.Now;
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductSize productSize)
         {
             if (ModelState.IsValid)
             {
-				productSize.IsDeleted=false;
-					productSize.LastModifiedDate=DateTime.Now;
+                productSize.IsDeleted = false;
+                productSize.LastModifiedDate = DateTime.Now;
+
+                UpdateParentProductOnEdit(productSize);
+
                 db.Entry(productSize).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index",new{id=productSize.ProductId});
+                return RedirectToAction("Index", new { id = productSize.ProductId });
             }
             ViewBag.ProductId = productSize.ProductId;
             ViewBag.SizeId = new SelectList(db.Sizes, "Id", "Title", productSize.SizeId);
@@ -106,11 +148,11 @@ namespace MashadCarpetShop.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             ProductSize productSize = db.ProductSizes.Find(id);
-			productSize.IsDeleted=true;
-			productSize.DeletionDate=DateTime.Now;
- 
+            productSize.IsDeleted = true;
+            productSize.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
-            return RedirectToAction("Index",new{id=productSize.ProductId});
+            return RedirectToAction("Index", new { id = productSize.ProductId });
         }
 
         protected override void Dispose(bool disposing)

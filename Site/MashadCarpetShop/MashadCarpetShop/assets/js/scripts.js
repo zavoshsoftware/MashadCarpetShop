@@ -467,8 +467,20 @@ PAGE JS
 	
 	$(document).on("ready", function() {
 		carousel_slider();
-		slick_slider();
+        slick_slider();
+	    basketCount();
 	});
+
+    function basketCount() {
+        //var cookie = getCookie('basket-khoshdast');
+        //if (cookie != null) {
+        //    var orderDetails = cookie.split('/');
+
+        //    $('.cart_count').html(orderDetails.length - 1);
+        //} else {
+        //    $('.cart_count').html('0');
+        //}
+    }
 	/*===================================*
 	11. CONTACT FORM JS
 	*===================================*/

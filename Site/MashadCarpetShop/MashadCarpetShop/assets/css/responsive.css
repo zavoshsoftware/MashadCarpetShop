@@ -1640,7 +1640,7 @@ footer .widget_title,
 	padding: 0 25px;
 }
 .page-title-mini .page-title h1 {
-	font-size: 24px;
+	font-size: 18px;
 }
 .countdown_box .countdown {
 	font-size: 30px;
@@ -1810,7 +1810,7 @@ footer .widget_title,
 	display: block;
 }
 .shop_container .col-6 {
-	max-width: 100%;
+
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 }

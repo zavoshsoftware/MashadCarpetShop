@@ -1,0 +1,237 @@
+﻿@model ViewModels.ProductListViewModel
+@{
+    ViewBag.Title = Model.ProductGroupTitle;
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+ 
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<!-- STRART CONTAINER -->
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>@Model.ProductGroupTitle</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item"><a href="/carpet-online-shopping">محصولات</a></li>
+					<li class="breadcrumb-item active"> @Model.ProductGroupTitle</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="row align-items-center mb-4 pb-1">
+						<div class="col-12">
+							<div class="product_header">
+								<div class="custom-filter ">
+									<div class="  d-none d-lg-block">
+										<i class="fa fa-align-right"></i>
+										<ul>
+											<li>مرتب سازی بر اساس:</li>
+											<li><a id="newest" href="#" class="sortby active">جدیدترین</a></li>
+											<li><a id="mostsell" href="#" class="sortby">پرفروش ترین</a></li>
+											<li><a id="cheapest" href="#" class="sortby">ارزان ترین</a></li>
+											<li><a id="expensive" href="#" class="sortby">گران ترین</a></li>
+											<li><a id="mostdiscount" href="#" class="sortby">بیشترین تخفیف</a></li>
+										</ul>
+									</div>
+
+									<div class="row">
+										<div class="col-12">
+											<select id="ddlsortby" class="form-control form-control-sm d-lg-none d-xl-none">
+												<option value="sortby">مرتب سازی</option>
+												<option value="newest">جدیدترین</option>
+												<option value="mostsell">پرفروش ترین</option>
+												<option value="cheapest">ارزان ترین</option>
+												<option value="expensive">گران ترین</option>
+												<option value="mostdiscount">بیشترین تخفیف</option>
+											</select>
+
+										</div>
+							 
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row shop_container grid">
+						
+						@foreach (var product in Model.Products)
+						{
+								<div class="col-lg-3 col-md-4 col-6">
+									<div class="product">
+										<div class="product_img">
+											<a href="/carpet-online-shopping/@Model.ProductGroupUrlParam/@product.Product.Code">
+												<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
+											</a>
+											<div class="product_action_box">
+												<ul class="list_none pr_action_btn">
+												@foreach (var size in product.Sizes)
+												{
+													<li><a href="#"><span>@size</span></a></li>
+												}
+												</ul>
+											</div>
+										</div>
+										<div class="product_info">
+											<h6 class="product_title"><a href="/carpet-online-shopping/@Model.ProductGroupUrlParam/@product.Product.Code">@product.Product.Title</a></h6>
+											<div class="product_price">
+												@if (product.Product.IsInPromotion)
+												{
+													<span class="price">@product.Product.DiscountAmountStr</span>
+													<del>@product.Product.AmountStr</del>
+												}
+												else
+												{
+													<span class="price">@product.Product.AmountStr</span>
+												}
+											</div>
+										 
+											<div class="card-btn">
+												<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@Model.ProductGroupUrlParam/@product.Product.Code">مشاهده محصول</a>
+											</div>
+										</div>
+									</div>
+								</div>
+						}
+				
+			 
+
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<ul class="pagination mt-3 justify-content-center pagination_style1">
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+</div>
+
+
+@section scripts{
+
+	<script>
+		function showCollapse(id) {
+			$('#' + id).slideToggle();
+		}
+
+		$(document).ready(function () {
+			setSortLink();
+			$('select#ddlsortby').on('change',
+				'',
+				function (e) {
+					sortDdlChangeEvent($('select#ddlsortby').val());
+				});
+			$('#btnfilter').click(function () {
+				var names = [];
+				$('#list_brand input:checked').each(function () {
+					names.push(this.name);
+				});
+
+				var qs = '';
+				for (var i = 0; i < names.length; i++) {
+					if (i === 0) {
+						qs = '?brands[0]=' + names[0];
+					} else {
+						qs = qs + '&brands[' + i + ']=' + names[i];
+					}
+				}
+
+				var url = window.location.href;
+				var baseUrl = url.split('?')[0];
+
+				window.location.href = baseUrl + qs;
+
+			});
+		});
+
+		function setSortLink() {
+			var url = window.location.href;
+
+			setLink("newest", url);
+			setLink("mostsell", url);
+			setLink("cheapest", url);
+			setLink("expensive", url);
+			setLink("mostdiscount", url);
+
+			setActiveSort("newest", url);
+			setActiveSort("mostsell", url);
+			setActiveSort("cheapest", url);
+			setActiveSort("expensive", url);
+			setActiveSort("mostdiscount", url);
+
+		}
+
+		function setLink(id, url) {
+			url = removePreviousSortValFromUrl(url);
+
+			if (url.includes('?')) {
+				$("a#" + id).attr("href", url + "&sortby=" + id);
+			} else {
+				$("a#" + id).attr("href", url + "?sortby=" + id);
+			}
+		}
+
+		function setActiveSort(id, url) {
+			if (url.includes(id)) {
+				$('.sortby').removeClass('active');
+				$('#' + id).addClass('active');
+
+				$('select#ddlsortby').val(id);
+			}
+
+
+		}
+
+		function sortDdlChangeEvent(sortybyVal) {
+			if (sortybyVal !== "sortby") {
+				var url = window.location.href;
+
+				url = removePreviousSortValFromUrl(url);
+
+				if (url.includes('?')) {
+					window.location = (url + "&sortby=" + sortybyVal);
+
+				} else {
+					window.location = (url + "?sortby=" + sortybyVal);
+				}
+			}
+		}
+
+		function removePreviousSortValFromUrl(url) {
+			if (url.includes('?sortby')) {
+				url = (url.split('?sortby')[0]);
+			} else if (url.includes('&sortby')) {
+				url = (url.split('&sortby')[0]);
+			}
+
+			return url;
+		}
+	</script>
+	 
+
+
+}

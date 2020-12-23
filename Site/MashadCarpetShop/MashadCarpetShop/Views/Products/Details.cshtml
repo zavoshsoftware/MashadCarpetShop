@@ -1,259 +1,280 @@
-﻿@model Models.Product
+﻿@using System.Web.UI.HtmlControls
+@model ViewModels.ProductDetailViewModel
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+		ViewBag.Title = Model.ProductSize.Product.Title;
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Product</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Color.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Color.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Parent.Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Parent.Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductGroup.Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductGroup.Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Order)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Order)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TitleEn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TitleEn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DesignNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DesignNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Reeds)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reeds)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Shots)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Shots)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Frame)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Frame)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PageTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PageTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PageTitleEn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PageTitleEn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PageDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PageDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PageDescriptionEn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PageDescriptionEn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BodyEn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BodyEn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiscountAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiscountAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInPromotion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsInPromotion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsInHome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Visit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Visit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAvailable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletionDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletionDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+ <!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<!-- STRART CONTAINER -->
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>@Model.ProductSize.Product.Title</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item"><a href="/carpet-online-shopping">محصولات</a></li>
+					<li class="breadcrumb-item"><a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam">@Model.ProductSize.Product.ProductGroup.Title</a></li>
+					<li class="breadcrumb-item active">@Model.ProductSize.Product.Title</li>
+				</ol>
+			</div>
+		</div>
+	</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+					<div class="product-image">
+						<div class="product_img_box">
+							<img id="product_img" src='@Model.ProductSize.Product.ImageUrl' data-zoom-image="@Model.ProductSize.Product.ImageUrl" alt="@Model.ProductSize.Product.Title" />
+							<a href="#" class="product_img_zoom" title="Zoom">
+								<span class="linearicons-zoom-in"></span>
+							</a>
+						</div>
+						<div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+						
+						 
+							<div class="item">
+								<a href="#" class="product_gallery_item active" data-image="@Model.ProductSize.Product.ImageUrl" data-zoom-image="@Model.ProductSize.Product.ImageUrl">
+									<img src="@Model.ProductSize.Product.ImageUrl" alt="@Model.ProductSize.Product.Title"/>
+								</a>
+							</div>
+									@foreach (var img in Model.ProductImages)
+									{
+										 
+											<div class="item">
+												<a href="#" class="product_gallery_item" data-image="@img.ImageUrl" data-zoom-image="@img.ImageUrl">
+													<img src="@img.ImageUrl" alt="@Model.ProductSize.Product.Title" />
+												</a>
+											</div>
+										 
+									}
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<div class="pr_detail">
+						<div class="product_description">
+							<h4 class="product_title"><a href="#">@Model.ProductSize.Product.Title</a></h4>
+							<div class="product_price">
+								
+								@if (Model.ProductSize.IsInPromotion)
+								{
+									<span class="price">@Model.ProductSize.DiscountAmountStr</span>
+									<del>@Model.ProductSize.AmountStr</del>
+								}
+								else
+								{
+									<span class="price">@Model.ProductSize.AmountStr</span>
+								}
+
+							</div>
+							 
+							<div class="pr_desc">
+								@Html.Raw(Model.ProductSize.Product.Body)
+							</div>
+							<p class="clearfix"></p>
+
+							<div class="product_sort_info">
+								<ul>
+									<li><i class="linearicons-shield-check"></i> خدمات پس از فروش</li>
+									<li><i class="linearicons-sync"></i> بازگشت کالا تا 48 ساعت</li>
+									<li><i class="linearicons-bag-dollar"></i> عضویت در باشگاه مشتریان</li>
+								</ul>
+							</div>
+							<div class="pr_switch_wrap">
+								<span class="switch_lable">رنگ های موجود</span>
+								<div class="product_color_switch">
+									@foreach (var color in Model.ProductColors)
+									{
+										if (color.IsActive)
+										{
+										<span class="active" data-color="#@color.HexCode"></span>}
+										else
+										{
+													<a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam/@color.Code"><span data-color="#@color.HexCode"></span></a>
+										}
+									}
+								</div>
+							</div>
+							<div class="pr_switch_wrap">
+								<span class="switch_lable">سایزهای موجود</span>
+								<div class="product_size_switch">
+									@foreach (var size in Model.ProductSizes)
+									{
+										if (size.IsActive)
+										{
+											<span class="active">@size.Title</span>
+}
+										else
+										{
+											<a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam/@Model.ProductSize.Product.Code?productSizeId=@size.Id">
+												<span>@size.Title</span>
+											</a>
+														}
+														}
+</div>
+							</div>
+						</div>
+						<hr />
+						<div class="cart_extra">
+							<div class="cart-product-quantity">
+								<div class="quantity">
+									<input type="button" value="-" class="minus">
+									<input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+									<input type="button" value="+" class="plus">
+								</div>
+							</div>
+							<div class="cart_btn">
+								<button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</button>
+					
+							</div>
+						</div>
+						<hr />
+						<ul class="product-meta">
+							<li>تراکم: <a href="#">@Model.ProductSize.Product.Shots</a></li>
+							<li>شانه: <a href="#">@Model.ProductSize.Product.Reeds</a></li>
+							<li>تعداد رنگ: <a href="#" rel="tag">@Model.ProductSize.Product.Frame</a> </li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="large_divider clearfix"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="small_divider"></div>
+				<div class="divider"></div>
+				<div class="medium_divider"></div>
+			</div>
+		</div>
+			<div class="row">
+				<div class="col-12">
+				
+					<div class="" id="Reviews">
+						<div class="comments">
+							<h5 class="product_tab_title">@Model.ProductComments.Count() نظر برای<span>@Model.ProductSize.Product.Title</span></h5>
+							<ul class="list_none comment_list mt-4">
+							
+								@foreach (var comment in Model.ProductComments)
+								{
+									<li>
+										<div class="comment_img">
+											<img src="/assets/images/user1.jpg" alt="user1" />
+										</div>
+										<div class="comment_block">
+											 
+											<p class="customer_meta">
+												<span class="review_author">@comment.Name</span>
+												<span class="comment-date">@comment.CreationDateStr</span>
+											</p>
+											<div class="description">
+												<p>@comment.Message</p>
+											</div>
+										</div>
+									</li>
+								}
+							
+				 
+							</ul>
+						</div>
+						<div class="review_form field_form">
+							<h5>ثبت نظر جدید</h5>
+							<div class="row mt-3">
+							 
+								<div class="form-group col-12">
+									<textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4"></textarea>
+								</div>
+								<div class="form-group col-md-6">
+									<input required="required" placeholder="نام *" class="form-control" name="name" type="text">
+								</div>
+								<div class="form-group col-md-6">
+									<input required="required" placeholder="ایمیل *" class="form-control" name="email" type="email">
+								</div>
+
+								<div class="form-group col-12">
+									<button type="submit" class="btn btn-fill-out" name="button" value="Submit">ثبت نظر</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			<div class="col-12">
+				<div class="small_divider"></div>
+				<div class="divider"></div>
+				<div class="medium_divider"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="heading_s1">
+					<h3>محصولات مرتبط</h3>
+				</div>
+				<div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
+				@foreach (var product in Model.RelatedProducts)
+				{
+					<div class="item">
+						<div class="product">
+							<div class="product_img">
+								<a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">
+									<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
+								</a>
+								<div class="product_action_box">
+									<ul class="list_none pr_action_btn">
+										@foreach (var size in product.Sizes)
+										{
+											<li><a href="#"><span>@size</span></a></li>
+										}
+									</ul>
+								</div>
+							</div>
+							<div class="product_info">
+								<h6 class="product_title"><a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">@product.Product.Title</a></h6>
+								<div class="product_price">
+									@if (product.Product.IsInPromotion)
+									{
+										<span class="price">@product.Product.DiscountAmountStr</span>
+										<del>@product.Product.AmountStr</del>
+									}
+									else
+									{
+										<span class="price">@product.Product.AmountStr</span>
+									}
+								</div>
+										 
+								<div class="card-btn">
+									<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">مشاهده محصول</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+				
+				 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+</div>
+<!-- END MAIN CONTENT -->

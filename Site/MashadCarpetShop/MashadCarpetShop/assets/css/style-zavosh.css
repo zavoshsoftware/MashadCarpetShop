@@ -30,3 +30,36 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .bg-blue {
     background-color: #F4F9FC;
 }
+
+.custom-filter {
+    background-color: #f7f8fb;
+    width: 100%;
+    padding: 10px 5px;
+    font-size: 14px;
+    border: 1px solid #2f4497;
+   
+} 
+.custom-filter i {
+    float: right;
+    margin-top: 4px;
+}
+
+.custom-filter ul{
+    display: inline;
+}
+
+.custom-filter li {
+    float: right;
+    list-style: none;
+    margin-right: 5px;
+}
+
+.custom-filter li a {
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+    .custom-filter li a.active {
+        background-color: #2f4497;
+        color: #fff;
+    }
