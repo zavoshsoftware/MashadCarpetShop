@@ -2,7 +2,7 @@
 @model ViewModels.ProductDetailViewModel
 
 @{
-		ViewBag.Title = Model.ProductSize.Product.Title;
+		
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
@@ -13,7 +13,9 @@
 		<div class="row align-items-center">
 			<div class="col-md-6">
 				<div class="page-title">
-					<h1>@Model.ProductSize.Product.Title</h1>
+			
+						<h1>@Model.ProductSize.Product.Title</h1>
+				
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -132,12 +134,12 @@
 							<div class="cart-product-quantity">
 								<div class="quantity">
 									<input type="button" value="-" class="minus">
-									<input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+									<input type="text" id="quantity" name="quantity" value="1" title="Qty" class="qty" size="4">
 									<input type="button" value="+" class="plus">
 								</div>
 							</div>
 							<div class="cart_btn">
-								<button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</button>
+								<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@ViewBag.productSizeId')" type="button"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</button>
 					
 							</div>
 						</div>
@@ -277,4 +279,9 @@
 @Html.Partial("FrontEnd/_NewsLetterPartial")
 
 </div>
-<!-- END MAIN CONTENT -->
+
+
+@section scripts{
+	
+<script src="~/Scripts/function.js"></script>
+}

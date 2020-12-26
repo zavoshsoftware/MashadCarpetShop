@@ -263,18 +263,21 @@ namespace MashadCarpetShop.Controllers
                 var sizes = db.ProductSizes.Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive)
                     .ToList();
 
-                List<string> productSizes = new List<string>();
-
-                foreach (ProductSize productSize in sizes)
+                if (sizes.Any())
                 {
-                    productSizes.Add(productSize.Size.Title);
+                    List<string> productSizes = new List<string>();
+
+                    foreach (ProductSize productSize in sizes)
+                    {
+                        productSizes.Add(productSize.Size.Title);
+                    }
+
+                    productCard.Add(new ProductCardViewModel()
+                    {
+                        Product = product,
+                        Sizes = productSizes
+                    });
                 }
-
-                productCard.Add(new ProductCardViewModel()
-                {
-                    Product = product,
-                    Sizes = productSizes
-                });
             }
 
             return productCard;
@@ -321,6 +324,8 @@ namespace MashadCarpetShop.Controllers
                 ProductImages = db.ProductImages.Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive).ToList()
             };
 
+            if(productSize!=null)
+                ViewBag.Title = productSize.Product.Title;
             return View(result);
         }
 
@@ -352,6 +357,9 @@ namespace MashadCarpetShop.Controllers
                     Title = productSize.Title,
                     IsActive = isActive
                 });
+
+                if (isActive)
+                    ViewBag.productSizeId = productSize.Id;
             }
 
             return sizes;
@@ -373,15 +381,18 @@ namespace MashadCarpetShop.Controllers
 
             foreach (var oProduct in products)
             {
-                bool isActive = oProduct.Id == product.Id;
-
-                colors.Add(new ProductColorViewModel()
+                if (db.ProductSizes.Any(c => c.ProductId == oProduct.Id))
                 {
-                    IsActive = isActive,
-                    Title = oProduct.Title,
-                    Code = oProduct.Code,
-                    HexCode = oProduct.HexCode
-                });
+                    bool isActive = oProduct.Id == product.Id;
+
+                    colors.Add(new ProductColorViewModel()
+                    {
+                        IsActive = isActive,
+                        Title = oProduct.Title,
+                        Code = oProduct.Code,
+                        HexCode = oProduct.HexCode
+                    });
+                }
             }
 
             return colors;

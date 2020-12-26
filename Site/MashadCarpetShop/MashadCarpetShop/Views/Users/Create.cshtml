@@ -1,7 +1,8 @@
 ﻿@model Models.User
 
 @{
-    ViewBag.Title = "افزودن " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+		Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+		ViewBag.Title = "افزودن " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
 }
 
 <h2>افزودن @Html.DisplayNameFor(model => model)</h2>

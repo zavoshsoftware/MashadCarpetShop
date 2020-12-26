@@ -1,0 +1,156 @@
+﻿@model ViewModels.CartViewModel
+
+@{
+		ViewBag.Title = "سبد خرید";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>سبد خرید</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">سبد خرید</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="table-responsive shop_cart_table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="product-thumbnail">&nbsp;</th>
+									<th class="product-name text-center">محصول</th>
+									<th class="product-name text-center">اندازه</th>
+									<th class="product-price">قیمت</th>
+									<th class="product-quantity">تعداد</th>
+									<th class="product-subtotal">جمع</th>
+									<th class="product-remove">حذف</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								@foreach (var product in Model.Products)
+								{
+										<tr>
+											<td class="product-thumbnail"><a href="#"><img src="@product.ProductSize.Product.ImageUrl" alt="product1"></a></td>
+											<td class="product-name" data-title="Product"><a href="#">@product.ProductSize.Product.Title</a></td>
+											<td class="product-price" data-title="Price">@product.ProductSize.Size.Title</td>
+											<td class="product-price" data-title="Price">@product.ProductSize.AmountStr</td>
+											<td class="product-quantity" data-title="Quantity">
+												<div class="quantity">
+													<input type="button" value="-" class="minus">
+													<input type="text" name="quantity" value="@product.Quantity" title="Qty" id="txt-qty-@product.ProductSize.Id" class="qty" size="4">
+													<input type="button" value="+" class="plus">
+												</div>
+											</td>
+											<td class="product-subtotal" data-title="Total">@product.RowAmount</td>
+											<td class="product-remove" data-title="Remove"><a href="#"><i class="ti-close"></i></a></td>
+										</tr>
+								}
+
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="7" class="px-0">
+										<div class="row no-gutters align-items-center">
+
+											<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+												<div class="coupon field_form input-group">
+													<input type="text" value="" id="coupon" class="form-control form-control-sm" placeholder="کد تخفیف را وارد نمایید.">
+													<div class="input-group-append">
+														<button class="btn btn-fill-out btn-sm" type="button" onclick="addDiscountCode();">اعمال کد تخفیف</button>
+													</div>
+													
+													<div id="SuccessDiv-discount" class="alert alert-success">کد تخفیف با موفقیت اعمال شد</div>
+													<div id="errorDiv-discount" class="alert alert-danger"></div>
+												</div>
+											</div>
+											<div class="col-lg-8 col-md-6 text-left text-md-right">
+												<a href="/checkout" class="btn btn-fill-out btn-sm btn-go">ادامه فرایند خرید</a>
+
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="small_divider"></div>
+					<div class="divider center_icon"><i class="ti-shopping-cart-full"></i></div>
+					<div class="small_divider"></div>
+				</div>
+			</div>
+			<div class="row">
+		
+				<div class="col-md-6">
+					<div class="border p-3 p-md-4">
+						<div class="heading_s1 mb-3">
+							<h6>جمع فاکتور</h6>
+						</div>
+						<div class="table-responsive">
+							<table class="table">
+								<tbody>
+								<tr>
+									<td class="cart_total_label">جمع قیمت کالاها</td>
+									<td class="cart_total_amount">@Model.SubTotal</td>
+								</tr>
+								<tr>
+									<td class="cart_total_label">هزینه حمل</td>
+									<td class="cart_total_amount">@Model.ShipmentAmount</td>
+								</tr>
+								<tr>
+									<td class="cart_total_label">تخفیف</td>
+									<td class="cart_total_amount">@Model.DiscountAmount</td>
+								</tr>
+								<tr>
+									<td class="cart_total_label">مبلغ قابل پرداخت</td>
+									<td class="cart_total_amount"><strong>@Model.Total</strong></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<a href="/checkout" class="btn btn-fill-out">ادامه فرایند خرید</a>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div class="heading_s1 mb-3 border p-3 p-md-4 policy">
+						<h6>قوانین و مقررات خرید</h6>
+						<p>شرکت فرش مشهد بزرگترین عضو گروه صنعتی مشهد و یکی از بزرگترین تولید کنندگان فرش ماشینی در ایران می باشد همواره تلاش کرده ایم تا بهترین فرش ماشینی را به خانه ها بیاوریم. این شرکت در سال ۱۳۵۶ در مشهد، دومین شهر بزرگ ایران، با ظرفیت تولید سالانه ۲۴۰،۰۰۰ متر مربع آغاز به کار کرد. در طول سالهای متمادی جهت رقابت داخلی و جهانی با همکاری تیمی توانمند، شامل مدیران با تجربه، مهندسین مجرب و گارگران ماهر تولید سالانه به ۲،۴۰۰،۰۰۰ متر مربع افزایش یافت. </p>
+					</div>
+			 
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+
+</div>
+
+<div class="loading-fuulpage">Loading&#8230;</div>
+
+@section scripts{
+
+	<script src="~/Scripts/function.js"></script>
+}

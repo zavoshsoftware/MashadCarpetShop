@@ -1,0 +1,160 @@
+﻿@model ViewModels.CheckOutViewModel
+
+@{
+    ViewBag.Title = "پرداخت سفارش";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<!-- STRART CONTAINER -->
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>پرداخت سفارش</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">پرداخت سفارش</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+	 
+	 
+			<div class="row">
+				<div class="col-md-6">
+					<div class="heading_s1">
+						<h4>اطلاعات پرداخت</h4>
+					</div>
+						<div class="form-group">
+							<input type="text" required class="form-control" value="@Model.UserInformation.FullName" id="fullname" placeholder="نام تحویل گیرنده *">
+						</div>
+						<div class="form-group">
+							<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" id="cellnumber" placeholder="شماره موبایل تحویل گیرنده *">
+						</div>
+						<div class="form-group">
+						
+							<div class="custom_select">
+								<select id="billing_Province" class="form-control">
+									@foreach (var province in Model.Provinces)
+									{
+										<option value="@province.Id">@province.Title</option>
+
+									}
+								</select>
+
+							</div>
+						</div>
+					<div class="form-group">
+						<div class="custom_select">
+							<select id="ddlcity" class="form-control">
+								<option value="0">انتخاب شهر*</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="address" required="" placeholder="آدرس *">
+					</div>
+					<div class="form-group">
+						<input class="form-control" required type="text" id="postalCode" placeholder="کد پستی">
+					</div>
+						<div class="form-group mb-0">
+							<textarea rows="5" class="form-control" id="note" placeholder="توضیحات"></textarea>
+						</div>
+					
+				</div>
+				<div class="col-md-6">
+					<div class="order_review">
+						<div class="heading_s1">
+							<h4>سفارش شما</h4>
+						</div>
+						<div class="table-responsive order_table">
+							<table class="table">
+								<thead>
+								<tr>
+									<th>محصول</th>
+									<th>جمع مبلغ</th>
+								</tr>
+								</thead>
+								<tbody>
+								@foreach (var product in Model.Products)
+								{
+									<tr>
+										<td>@product.ProductSize.Product.Title <span class="product-qty">x @product.Quantity</span></td>
+										<td>@product.RowAmount</td>
+									</tr>
+								}
+							
+								</tbody>
+								<tfoot>
+								<tr>
+									<th>جمع قیمت کالاها</th>
+									<td>@Model.SubTotal</td>
+								</tr>
+								<tr>
+									<th>هزینه حمل</th>
+									<td>@Model.ShipmentAmount</td>
+								</tr>	<tr>
+									<th>تخفیف</th>
+									<td>@Model.DiscountAmount</td>
+								</tr>
+								<tr>
+									<th>مبلغ قابل پرداخت</th>
+									<td class="product-subtotal">@Model.Total</td>
+								</tr>
+								</tfoot>
+							</table>
+							
+							<div id="success-checkout-box" class="alert alert-success">در حال انتقال به درگاه پرداخت بانک</div>
+							<div id="error-box" class="alert alert-danger"></div>
+						</div>
+					 
+						<button type="button" onclick="finalizeOrder();" class="btn btn-fill-out btn-block">پرداخت</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+@section scripts{
+	<script>
+		$('#billing_Province').on('change',
+			function () {
+				var SelectedValue = $(this).val();
+				if (SelectedValue !== "") {
+					var procemessage = "<option value='0'> صبرکنید...</option>";
+					$("#ddlcity").html(procemessage).show();
+					$.ajax(
+						{
+							url: "/Basket/FillCities",
+							data: { id: SelectedValue },
+							cache: false,
+							type: "POST",
+							success: function (data) {
+								var markup = "<option value='0'>انتخاب شهر</option>";
+								for (var x = 0; x < data.length; x++) {
+									markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+								}
+								$("#ddlcity").html(markup).show();
+							},
+							error: function (reponse) {
+								alert("error : " + reponse);
+							}
+						});
+				}
+			});
+	</script>
+}
