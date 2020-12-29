@@ -1,0 +1,84 @@
+﻿
+@model ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "ثبت نام";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<!-- STRART CONTAINER -->
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>ثبت نام</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">ثبت نام</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_content">
+
+	<div class="login_register_wrap section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-6 col-md-10">
+					<div class="login_wrap">
+						<div class="padding_eight_all bg-white">
+							<div class="heading_s1">
+								<h3>ورود</h3>
+							</div>
+							@if (TempData["WrongPass"] != null)
+							{
+								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongPass"]</p>
+							}
+						@using (Html.BeginForm("Register", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "panel-body wrapper-lg", role = "form"}))
+						{
+							<div >
+								@Html.AntiForgeryToken()
+								@Html.ValidationSummary(false, "", new { @class = "alert-danger" })
+								<div class="form-group">
+									<input type="text" required="" class="form-control" name="FullName" placeholder="نام و نام خانوادگی">
+								</div>	
+								<div class="form-group">
+									<input type="text" required="" class="form-control" name="Email" placeholder="ایمیل">
+								</div>
+								<div class="form-group">
+									<input type="text" required="" class="form-control" name="Username" placeholder="شماره موبایل">
+								</div>
+								<div class="form-group">
+									<input class="form-control" required="" type="password" name="Password" placeholder="کلمه عبور">
+								</div>
+								@*<div class="login_footer form-group">
+									<div class="chek-form">
+										<div class="custome-checkbox">
+											<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+											<label class="form-check-label" for="exampleCheckbox1"><span>قوانین و مقررات سایت فرش مشهد را می پذیرم</span></label>
+										</div>
+									</div>
+								</div>*@
+								<div class="form-group">
+									<button type="submit" class="btn btn-fill-out btn-block" name="register">ثبت نام</button>
+								</div>
+							</div>
+						}
+
+							<div class="different_login">
+								<span> یا</span>
+							</div>
+					 
+							<div class="form-note text-center">اگر قبلا حساب کاربری ایجاد کرده اید <a href="/login">وارد شوید</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

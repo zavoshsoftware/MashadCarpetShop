@@ -1,18 +1,15 @@
-﻿function SubmitComment() {
+﻿function submitBlogComment(id) {
+ 
 
-
-    var url = window.location.pathname;
-    var id = url.substring(url.lastIndexOf('/') + 1);
-
-    var nameVal = $("#commentName").val();
-    var emailVal = $("#commentEmail").val();
-    var bodyVal = $("#commentBody").val();
+    var nameVal = $("#name").val();
+    var emailVal = $("#email").val();
+    var bodyVal = $("#message").val();
     if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
         $.ajax(
             {
-                url: "/ProductComments/SubmitComment",
+                url: "/BlogComments/SubmitComment",
                 data: { name: nameVal, email: emailVal, body: bodyVal, code: id },
-                type: "GET"
+                type: "POST"
             }).done(function (result) {
                 if (result === "true") {
                     $("#errorDiv").css('display', 'none');
@@ -25,10 +22,16 @@
                     $("#SuccessDiv").css('display', 'none');
 
                 }
+                else if (result === "false") {
+                    $("#errorDiv").html('خطایی رخ داده است. لطفا صفحه را مجدادا باز کنید.');
+                    $("#errorDiv").css('display', 'block');
+                    $("#SuccessDiv").css('display', 'none');
+
+                }
             });
     }
     else {
-        $("#errorDiv").html('تمامی فیلد های زیر را تکمیل نمایید.');
+        $("#errorDiv").html('تمامی فیلد های ستاره دار را تکمیل نمایید.');
         $("#errorDiv").css('display', 'block');
         $("#SuccessDiv").css('display', 'none');
 
@@ -305,7 +308,7 @@ function SubmitContactUs() {
 
     var nameVal = $("#commentName").val();
     var emailVal = $("#commentEmail").val();
-    var bodyVal = $("#commentBody").val();
+    var bodyVal = $("#description").val();
     if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
         $.ajax(
             {

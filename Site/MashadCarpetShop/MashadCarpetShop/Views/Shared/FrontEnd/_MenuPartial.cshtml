@@ -57,11 +57,25 @@
 						</li>
 
 
-						<li><a class="nav-link nav_item" href="/">اخبار و تازه ها</a></li>
+						<li><a class="nav-link nav_item" href="/blog">اخبار و تازه ها</a></li>
 						<li><a class="nav-link nav_item" href="/">شعب</a></li>
 						<li><a class="nav-link nav_item" href="/">باشگاه مشتریان</a></li>
-						<li><a class="nav-link nav_item" href="/">درباره ما</a></li>
-						<li><a class="nav-link nav_item" href="/">تماس با ما</a></li>
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">درباره ما</a>
+							<div class="dropdown-menu">
+								<ul>
+										<li><a class="dropdown-item nav-link nav_item" href="/about">درباره فرش مشهد</a></li>
+										<li><a class="dropdown-item nav-link nav_item" href="/about/value">رسالت ها و ارزشها</a></li>
+										<li><a class="dropdown-item nav-link nav_item" href="/about/honors">افتخارات فرش مشهد</a></li>
+										<li><a class="dropdown-item nav-link nav_item" href="/about/international">فعالیت های بین المللی</a></li>
+										<li><a class="dropdown-item nav-link nav_item" href="/corporate-social-responsibility">مسئولیت اجتماعی</a></li>
+								</ul>
+							</div>
+						</li>
+						
+
+						<li><a class="nav-link nav_item" href="/contact">تماس با ما</a></li>
 					</ul>
 				</div>
 				<ul class="navbar-nav attr-nav align-items-center">
@@ -76,8 +90,8 @@
 						</div><div class="search_overlay"></div>
 					</li>
 					<li class="dropdown cart_dropdown">
-						<a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
-						<div class="cart_box dropdown-menu dropdown-menu-right">
+						<a class="nav-link cart_trigger" href="/basket" ><i class="linearicons-cart"></i><span class="cart_count">0</span></a>
+						@*<div class="cart_box dropdown-menu dropdown-menu-right">
 							<ul class="cart_list">
 								<li>
 									<a href="#" class="item_remove"><i class="ion-close"></i></a>
@@ -94,7 +108,7 @@
 								<p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
 								<p class="cart_buttons"><a href="#" class="btn btn-fill-line rounded-0 view-cart">View Cart</a><a href="#" class="btn btn-fill-out rounded-0 checkout">Checkout</a></p>
 							</div>
-						</div>
+						</div>*@
 					</li>
 				</ul>
 			</nav>

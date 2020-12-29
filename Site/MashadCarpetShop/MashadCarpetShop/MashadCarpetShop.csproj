@@ -200,6 +200,18 @@
     <Content Include="assets\fonts\Simple-Line-Icons.svg" />
     <Content Include="assets\fonts\slick.svg" />
     <Content Include="assets\fonts\themify.svg" />
+    <Content Include="assets\images\3528large.jpg" />
+    <Content Include="assets\images\4.jpg" />
+    <Content Include="assets\images\about\international1.jpg" />
+    <Content Include="assets\images\about\international2.jpg" />
+    <Content Include="assets\images\about\international3.jpg" />
+    <Content Include="assets\images\about\response1.jpg" />
+    <Content Include="assets\images\about\response2.jpg" />
+    <Content Include="assets\images\about\response3.jpg" />
+    <Content Include="assets\images\about\response4.jpg" />
+    <Content Include="assets\images\about\response5.jpg" />
+    <Content Include="assets\images\about\response6.jpg" />
+    <Content Include="assets\images\about\response7.jpg" />
     <Content Include="assets\images\about_img.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\amarican_express.png" />
@@ -254,6 +266,10 @@
     <Content Include="assets\images\cat_img5.png" />
     <Content Include="assets\images\cat_img6.png" />
     <Content Include="assets\images\cat_img7.png" />
+    <Content Include="assets\images\certificates\anjoman-sanaye-nasaji_logo.jpg" />
+    <Content Include="assets\images\certificates\dralon_logo_.jpg" />
+    <Content Include="assets\images\certificates\iso.jpg" />
+    <Content Include="assets\images\certificates\standard logo2.jpg" />
     <Content Include="assets\images\close.png" />
     <Content Include="assets\images\cl_logo1.png" />
     <Content Include="assets\images\cl_logo2.png" />
@@ -295,12 +311,14 @@
     <Content Include="assets\images\f2.png" />
     <Content Include="assets\images\factory\1.jpg" />
     <Content Include="assets\images\factory\2.jpg" />
+    <Content Include="assets\images\about\reza-hamidi.jpg" />
     <Content Include="assets\images\factory\3.jpg" />
     <Content Include="assets\images\factory\4.jpg" />
     <Content Include="assets\images\factory\5.jpg" />
     <Content Include="assets\images\factory\6.jpg" />
     <Content Include="assets\images\factory\7.jpg" />
     <Content Include="assets\images\factory\8.jpg" />
+    <Content Include="assets\images\about\mashadcarpet-value.jpeg" />
     <Content Include="assets\images\favicon.png" />
     <Content Include="assets\images\fn.png" />
     <Content Include="assets\images\furniture_banner1.jpg" />
@@ -348,6 +366,7 @@
     <Content Include="assets\images\logo_dark.png" />
     <Content Include="assets\images\logo_light.png" />
     <Content Include="assets\images\marker.png" />
+    <Content Include="assets\images\mashadcarpet-about.jpg" />
     <Content Include="assets\images\master_card.png" />
     <Content Include="assets\images\menu_banner1.jpg" />
     <Content Include="assets\images\menu_banner11.jpg" />
@@ -468,6 +487,7 @@
     <Content Include="assets\owlcarousel\css\owl.theme.default.min.css" />
     <Content Include="assets\owlcarousel\js\owl.carousel.min.js" />
     <Content Include="assets\Scripts\kendo.modernizr.custom.js" />
+    <Content Include="assets\images\slaogan.png" />
     <Content Include="Content\Admin\admin-font-awesome.css" />
     <Content Include="Content\Admin\admin-font-awesome.min.css" />
     <Content Include="Content\Admin\AdminStyle.css" />
@@ -831,6 +851,7 @@
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -1014,6 +1035,10 @@
     <Compile Include="Migrations\202012261347527_V04.Designer.cs">
       <DependentUpon>202012261347527_V04.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012280546405_V05.cs" />
+    <Compile Include="Migrations\202012280546405_V05.Designer.cs">
+      <DependentUpon>202012280546405_V05.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1046,11 +1071,17 @@
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FaqViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\BlogDetailViewModel.cs" />
+    <Compile Include="ViewModels\BlogListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\CityItemViewModel.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProductDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductListViewModel.cs" />
@@ -1441,7 +1472,6 @@
     <Content Include="Views\Blogs\Edit.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Blogs\List.cshtml" />
-    <Content Include="Views\Blogs\ListByGroup.cshtml" />
     <Content Include="Views\ContactUsForms\Create.cshtml" />
     <Content Include="Views\ContactUsForms\Delete.cshtml" />
     <Content Include="Views\ContactUsForms\Details.cshtml" />
@@ -1515,6 +1545,16 @@
     <Content Include="Views\Basket\Basket.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Basket\CheckOut.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Blogs\ListByGroup.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AboutValue.cshtml" />
+    <Content Include="Views\Home\AboutHonor.cshtml" />
+    <Content Include="Views\Home\AboutInternational.cshtml" />
+    <Content Include="Views\Home\SocialResponsibility.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1549,6 +1589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012261347527_V04.resx">
       <DependentUpon>202012261347527_V04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012280546405_V05.resx">
+      <DependentUpon>202012280546405_V05.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

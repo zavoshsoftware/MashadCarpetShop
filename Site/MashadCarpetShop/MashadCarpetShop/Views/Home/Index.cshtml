@@ -10,10 +10,8 @@
 	<!-- Meta -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="Anil z" name="author">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Shopwise is Powerful features and You Can Use The Perfect Build this Template For Any eCommerce Website. The template is built for sell Fashion Products, Shoes, Bags, Cosmetics, Clothes, Sunglasses, Furniture, Kids Products, Electronics, Stationery Products and Sporting Goods.">
-	<meta name="keywords" content="ecommerce, electronics store, Fashion store, furniture store,  bootstrap 4, clean, minimal, modern, online store, responsive, retail, shopping, ecommerce store">
+	<meta name="description" content="وب سایت رسمی فرش مشهد">
 
 	<title>وب سایت رسمی شرکت فرش مشهد</title>
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
@@ -47,12 +45,12 @@
 <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
 		<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active background_bg" data-img-src="/assets/images/slide1.jpg" onclick="window.location.href='/pro';">
+				<div class="carousel-item active background_bg" data-img-src="/assets/images/3528large.jpg" onclick="window.location.href='/pro';">
 					<div class="banner_slide_content">
 			 
 					</div>
 				</div>
-				<div class="carousel-item background_bg" data-img-src="/assets/images/slide2.jpg" onclick="window.location.href='/pro';">
+				<div class="carousel-item background_bg" data-img-src="/assets/images/4.jpg" onclick="window.location.href='/pro';">
 					<div class="banner_slide_content">
 				 
 					</div>
@@ -77,70 +75,20 @@
 			<div class="row align-items-center">
 				<div class="col-12">
 					<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-autoplay="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "2"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/1.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
+					
+						@foreach (var productGroup in Model.ProductGroups)
+						{
+							<div class="item">
+								<div class="categories_box">
+									<a href="/carpet-online-shopping/@productGroup.UrlParam">
+										<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
+										<span>@productGroup.Title</span>
+									</a>
+								</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/2.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/3.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/4.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/5.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/6.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/7.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="categories_box">
-								<a href="#">
-									<img src="/assets/images/pg/8.jpg" alt="cat_img1" />
-									<span>فرش اکریلیک - ۱۲۰۰ شانه - ۸ رنگ - تراکم ۳۶۰۰</span>
-								</a>
-							</div>
-						</div>
+						}
+	
+					 
 					 
 					</div>
 				</div>
@@ -167,24 +115,39 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
 								<div class="row shop_container">
-									@for (int i = 0; i < 8; i++)
+									@foreach (var product in Model.TopProducts)
 									{
 										<div class="col-lg-3 col-md-4 col-6">
 											<div class="product">
-												<div class="">
-													<a href="/product/222">
-														<img src="/assets/images/p/2.jpg" alt="product_img1">
+												<div class="product_img">
+													<a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">
+														<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
 													</a>
-										 
+													<div class="product_action_box">
+														<ul class="list_none pr_action_btn">
+															@foreach (var size in product.Sizes)
+															{
+																<li><a href="#"><span>@size</span></a></li>
+															}
+														</ul>
+													</div>
 												</div>
 												<div class="product_info">
-													<h6 class="product_title"><a href="/product/222">محصول کرم کد 1002</a></h6>
+													<h6 class="product_title"><a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">@product.Product.Title</a></h6>
 													<div class="product_price">
-														<span class="price">1240000 تومان</span>
-														<del>1870000 تومان</del>
+														@if (product.Product.IsInPromotion)
+														{
+															<span class="price">@product.Product.DiscountAmountStr</span>
+															<del>@product.Product.AmountStr</del>
+														}
+														else
+														{
+															<span class="price">@product.Product.AmountStr</span>
+														}
 													</div>
+										 
 													<div class="card-btn">
-														<a class="btn btn-fill-out rounded-0" href="">خرید</a>
+														<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">مشاهده محصول</a>
 													</div>
 												</div>
 											</div>
@@ -240,23 +203,39 @@
 					<div class="col-md-12">
 						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-dots="false" data-nav="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
 					
-						@for (int i = 0; i < 8; i++)
-						{
+							@foreach (var product in Model.NewestProducts)
+							{
 							<div class="item">
 								<div class="product">
-									<div class="">
-										<a href="/product/222">
-											<img src="/assets/images/p/2.jpg" alt="product_img1">
+									<div class="product_img">
+										<a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">
+											<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
 										</a>
+										<div class="product_action_box">
+											<ul class="list_none pr_action_btn">
+												@foreach (var size in product.Sizes)
+												{
+													<li><a href="#"><span>@size</span></a></li>
+												}
+											</ul>
+										</div>
 									</div>
 									<div class="product_info">
-										<h6 class="product_title"><a href="/product/222">محصول کرم کد 1002</a></h6>
+										<h6 class="product_title"><a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">@product.Product.Title</a></h6>
 										<div class="product_price">
-											<span class="price">1240000 تومان</span>
-											<del>1870000 تومان</del>
+											@if (product.Product.IsInPromotion)
+											{
+												<span class="price">@product.Product.DiscountAmountStr</span>
+												<del>@product.Product.AmountStr</del>
+											}
+											else
+											{
+												<span class="price">@product.Product.AmountStr</span>
+											}
 										</div>
+										 
 										<div class="card-btn">
-											<a class="btn btn-fill-out rounded-0" href="">خرید</a>
+											<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">مشاهده محصول</a>
 										</div>
 									</div>
 								</div>
@@ -410,66 +389,31 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-lg-4 col-md-6">
-					<div class="blog_post blog_style2 box_shadow1">
-						<div class="blog_img">
-							<a href="blog-single.html">
-								<img src="/assets/images/blog/1.jpg" alt="el_blog_img1">
-							</a>
-						</div>
-						<div class="blog_content bg-white">
-							<div class="blog_text">
-								<h5 class="blog_title"><a href="blog-single.html">لکه بر فرش
-								</a></h5>
-								<ul class="list_none blog_meta">
-									<li><a href="#"><i class="ti-calendar"></i> 21 مهر 1399</a></li>
-									<li><a href="#"><i class="ti-comments"></i> 2 نظر</a></li>
-								</ul>
-								<p>لکه بر فرش بر روی انواع لکه های حاصل از روی غذا و خورشت،رب ادویه، چای،قهوه،نوشابه،شیر،شیر کاکائو،رژ لب،واکس،روغن های صنعتی و گریس مناسب بوده و کاملا آنها را پاک می کند.</p>
+				@foreach (var blog in Model.Blogs)
+				{
+					<div class="col-lg-4 col-md-6">
+						<div class="blog_post blog_style2 box_shadow1">
+							<div class="blog_img">
+								<a href="/blog/post/@blog.UrlParam">
+									<img src="@blog.ImageUrl" alt="el_blog_img1">
+								</a>
+							</div>
+							<div class="blog_content bg-white">
+								<div class="blog_text">
+									<h5 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title
+									</a></h5>
+									<ul class="list_none blog_meta">
+										<li><a href="#"><i class="ti-calendar"></i>@blog.CreationDateStr</a></li>
+										<li><a href="#"><i class="ti-comments"></i>@blog.CommentCount نظر</a></li>
+									</ul>
+									<p>@blog.Summery</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="blog_post blog_style2 box_shadow1">
-						<div class="blog_img">
-							<a href="blog-single.html">
-								<img src="/assets/images/blog/2.jpg" alt="el_blog_img2">
-							</a>
-						</div>
-						<div class="blog_content bg-white">
-							<div class="blog_text">
-								<h5 class="blog_title"><a href="blog-single.html">اطلاعیه فرش مشهد در خصوص فروشندگان اینترنتی
-								</a></h5>
-								<ul class="list_none blog_meta">
-									<li><a href="#"><i class="ti-calendar"></i> 21 مهر 1399</a></li>
-									<li><a href="#"><i class="ti-comments"></i> 2 نظر</a></li>
-								</ul>
-								<p>هرگونه سایت و فروشگاه اینترنتی که تحت عنوان فرش مشهد، محصولات این شرکت را عرضه می نماید مطلقا مورد تایید این شرکت نمی باشد </p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="blog_post blog_style2 box_shadow1">
-						<div class="blog_img">
-							<a href="blog-single.html">
-								<img src="/assets/images/blog/3.jpg" alt="el_blog_img2">
-							</a>
-						</div>
-						<div class="blog_content bg-white">
-							<div class="blog_text">
-								<h5 class="blog_title"><a href="blog-single.html">ویژگی های فرش ماشینی درجه یک
-								</a></h5>
-								<ul class="list_none blog_meta">
-									<li><a href="#"><i class="ti-calendar"></i> 21 مهر 1399</a></li>
-									<li><a href="#"><i class="ti-comments"></i> 2 نظر</a></li>
-								</ul>
-								<p>به طور کلی فرش ماشینی از نظر کیفیت به 5 درجه تقسیم بندی می شود، قالی های درجه یک یا S می بایست دارای خصوصیات بارز و ممتازی باشد و هیچ گونه ایراد یا نقصی به آن وارد نشود</p>
-							</div>
-						</div>
-					</div>
-				</div>
+			
+				}
+			 
 			</div>
 		</div>
 	</div>

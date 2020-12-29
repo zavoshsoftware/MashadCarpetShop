@@ -61,7 +61,8 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
                 color: #fff;
             }
 
-#SuccessDiv-discount, #errorDiv-discount, #error-box, #success-checkout-box {
+#SuccessDiv-discount, #errorDiv-discount, #error-box, #success-checkout-box, #errorDiv, #SuccessDiv,
+#errorDivContact, #SuccessDivContact {
     display: none;
 }
 
@@ -209,4 +210,23 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+.blog-detail-area {
+    background-color: #ececec;
+    padding: 15px;
+}
+
+.blog-detail-sidebar .widget {
+    background-color: #ececec;
+    padding: 15px;
+}
+
+.certificate-section h5 {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.response-section p {
+    text-align: justify;
 }

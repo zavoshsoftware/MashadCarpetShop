@@ -239,7 +239,7 @@ namespace MashadCarpetShop.Controllers
                 return Redirect("/carpet-online-shopping");
 
             List<Product> products = db.Products.Where(c =>
-                    c.ProductGroupId == productGroup.Id && c.ParentId != null && c.IsDeleted == false && c.IsActive)
+                   /* c.ProductGroupId == productGroup.Id &&*/ c.ParentId != null && c.IsDeleted == false && c.IsActive)
                 .ToList();
 
             ProductListViewModel result = new ProductListViewModel()

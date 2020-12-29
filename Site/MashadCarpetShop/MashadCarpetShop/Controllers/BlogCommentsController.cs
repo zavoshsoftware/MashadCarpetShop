@@ -18,7 +18,7 @@ namespace MashadCarpetShop.Controllers
 
         public ActionResult Index()
         {
-            var blogComments = db.BlogComments.Include(b => b.Blog).Where(b=>b.IsDeleted==false).OrderByDescending(b=>b.CreationDate);
+            var blogComments = db.BlogComments.Include(b => b.Blog).Where(b => b.IsDeleted == false).OrderByDescending(b => b.CreationDate);
             return View(blogComments.ToList());
         }
 
@@ -49,9 +49,9 @@ namespace MashadCarpetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-				blogComment.IsDeleted=false;
-				blogComment.CreationDate= DateTime.Now; 
-					
+                blogComment.IsDeleted = false;
+                blogComment.CreationDate = DateTime.Now;
+
                 blogComment.Id = Guid.NewGuid();
                 db.BlogComments.Add(blogComment);
                 db.SaveChanges();
@@ -77,15 +77,15 @@ namespace MashadCarpetShop.Controllers
             return View(blogComment);
         }
 
- 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BlogComment blogComment)
         {
             if (ModelState.IsValid)
             {
-				blogComment.IsDeleted=false;
-					blogComment.LastModifiedDate=DateTime.Now;
+                blogComment.IsDeleted = false;
+                blogComment.LastModifiedDate = DateTime.Now;
                 db.Entry(blogComment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -113,9 +113,9 @@ namespace MashadCarpetShop.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             BlogComment blogComment = db.BlogComments.Find(id);
-			blogComment.IsDeleted=true;
-			blogComment.DeletionDate=DateTime.Now;
- 
+            blogComment.IsDeleted = true;
+            blogComment.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -133,39 +133,48 @@ namespace MashadCarpetShop.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult SubmitComment(string name, string email, string body, string code,string site)
+        public ActionResult SubmitComment(string name, string email, string body, string code)
         {
-            bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-
-            if (!isEmail)
-                return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
-            else
+            try
             {
 
-                Blog blog =
-                    db.Blogs.FirstOrDefault(c => c.UrlParam == code);
+                bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
 
-                if (blog != null)
+                if (!isEmail)
+                    return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
+                else
                 {
-                    BlogComment comment = new BlogComment();
+                    Guid id = new Guid(code);
 
-                    comment.Name = name;
-                    comment.Email = email;
-                    comment.Message = body;
-                    comment.CreationDate = DateTime.Now;
-                    comment.IsDeleted = false;
-                    comment.Id = Guid.NewGuid();
-                    comment.BlogId = blog.Id;
-                    comment.IsActive = false;
-                    comment.Website = site;
+                    Blog blog =
+                        db.Blogs.FirstOrDefault(c => c.Id == id);
 
-                    db.BlogComments.Add(comment);
-                    db.SaveChanges();
-                    return Json("true", JsonRequestBehavior.AllowGet);
+                    if (blog != null)
+                    {
+                        BlogComment comment = new BlogComment();
+
+                        comment.Name = name;
+                        comment.Email = email;
+                        comment.Message = body;
+                        comment.CreationDate = DateTime.Now;
+                        comment.IsDeleted = false;
+                        comment.Id = Guid.NewGuid();
+                        comment.BlogId = blog.Id;
+                        comment.IsActive = false;
+
+                        db.BlogComments.Add(comment);
+                        db.SaveChanges();
+                        return Json("true", JsonRequestBehavior.AllowGet);
+                    }
+
+                    return Json("false", JsonRequestBehavior.AllowGet);
+
                 }
 
+            }
+            catch (Exception e)
+            {
                 return Json("false", JsonRequestBehavior.AllowGet);
-
             }
         }
     }

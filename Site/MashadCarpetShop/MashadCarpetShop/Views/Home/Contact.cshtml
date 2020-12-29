@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "تماس با ما";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>تماس با ما</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">تماس با ما</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main_content">
+
+	<div class="section pb_70">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-map2"></i>
+						</div>
+						<div class="contact_text">
+							<span>آدرس دفتر مرکزی تهران</span>
+							<p>خیابان ولیعصر، خیابان عاطفی، پلاک ۱۰۰، طبقه 4</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-map2"></i>
+						</div>
+						<div class="contact_text">
+							<span>آدرس کارخانه</span>
+							<p>مشهد، کیلومتر ۱۸ جاده قوچان</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-envelope-open"></i>
+						</div>
+						<div class="contact_text">
+							<span>ایمیل</span>
+							<a href="mailto:info@mashadcarpet.com">info [at] mashadcarpet.com</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-tablet2"></i>
+						</div>
+						<div class="contact_text">
+							<span>تلفن دفتر مرکزی</span>
+							<p>۲۲۰۱۲۶۱۲</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-tablet2"></i>
+						</div>
+						<div class="contact_text">
+							<span>تلفن فروش اینترنتی</span>
+							<p>۰۲۱۲۲۰۱۲۷۵۰</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-md-6">
+					<div class="contact_wrap contact_style3">
+						<div class="contact_icon">
+							<i class="linearicons-tablet2"></i>
+						</div>
+						<div class="contact_text">
+							<span>تلفن کارخانه</span>
+							<p>051۳۵۴۲۲۴۸۳</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section pt-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="heading_s1">
+						<h2>با ما در تماس باشید</h2>
+					</div>
+					<p class="leads">از طریق راه های ارتباطی ذکر شده در این صفحه و فرم زیر می توانید با ما در تماس باشید</p>
+					<div class="field_form">
+						<div name="enq">
+							<div class="row">
+								<div class="form-group col-md-6">
+									<input required placeholder="نام *" id="commentName" class="form-control" name="name" type="text">
+								</div>
+								<div class="form-group col-md-6">
+									<input required placeholder="ایمیل *" id="commentEmail" class="form-control" name="email" type="email">
+								</div>
+								 
+								<div class="form-group col-md-12">
+									<textarea required placeholder="پیام شما *" id="description" class="form-control" name="message" rows="4"></textarea>
+								</div>
+								<div class="col-md-12">
+									<button type="button" title="Submit Your Message!" class="btn btn-fill-out" onclick="SubmitContactUs();">ارسال پیام</button>
+								</div>
+								<div class="col-md-12">
+									<div id="errorDivContact" class="alert alert-danger"></div>
+									<div id="SuccessDivContact" class="alert alert-success">با تشکر. پیام شما با موفقیت ارسال شد</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 pt-2 pt-lg-0 mt-4 mt-lg-0">
+
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.1000955784853!2d51.41528790000001!3d35.77291750000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0689f7d18999%3A0x21ed013cd321e531!2sTehran%2C+W+Atefi+St!5e0!3m2!1sen!2sir!4v1440220941433" width="100%" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>				</div>
+			</div>
+		</div>
+	</div>
+
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+</div>
+
+@section scripts{
+	
+<script src="~/Scripts/function.js"></script>
+}

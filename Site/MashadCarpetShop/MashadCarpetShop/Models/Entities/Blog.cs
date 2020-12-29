@@ -35,6 +35,7 @@ namespace Models
         [Display(Name="تعداد بازدید")]
         public int Visit { get; set; }
 
+        public int CommentCount { get; set; }
         [Display(Name = "متن")]
         [DataType(DataType.Html)]
         [AllowHtml]

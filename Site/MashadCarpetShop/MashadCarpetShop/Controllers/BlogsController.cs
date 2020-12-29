@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace MashadCarpetShop.Controllers
 {
@@ -52,6 +53,7 @@ namespace MashadCarpetShop.Controllers
 
                 #endregion
 
+                blog.CommentCount = 0;
                 blog.Visit = 0;
                 blog.IsDeleted = false;
                 blog.CreationDate = DateTime.Now;
@@ -148,69 +150,157 @@ namespace MashadCarpetShop.Controllers
             base.Dispose(disposing);
         }
 
-        //[Route("blog")]
-        //[AllowAnonymous]
-        //public ActionResult List()
-        //{
-        //    List<Blog> blogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive)
-        //        .OrderByDescending(c => c.CreationDate).ToList();
+        [Route("blog")]
+        [AllowAnonymous]
+        public ActionResult List()
+        {
+            List<Blog> blogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive)
+                .OrderByDescending(c => c.CreationDate).ToList();
 
-        //    BlogListViewModel blogList=new BlogListViewModel()
-        //    {
-        //        Blogs = blogs
-        //    };
-        //    return View(blogList);
-        //}
-
-
-        //[Route("blog/{urlParam}")]
-        //[AllowAnonymous]
-        //public ActionResult ListByGroup(string urlParam)
-        //{
-        //    BlogGroup blogGroup = db.BlogGroups.FirstOrDefault(c => c.UrlParam == urlParam && c.IsActive);
-
-        //    if (blogGroup == null)
-        //        return Redirect("/blog");
-
-        //    List<Blog> blogs = db.Blogs.Where(c => c.BlogGroupId == blogGroup.Id && c.IsDeleted == false && c.IsActive)
-        //        .OrderByDescending(c => c.CreationDate).ToList();
-
-        //    BlogListViewModel blogList=new BlogListViewModel()
-        //    {
-        //        Blogs = blogs,
-        //        BlogGroup = blogGroup
-        //    };
-        //    return View(blogList);
-        //}
+            BlogListViewModel blogList = new BlogListViewModel()
+            {
+                Blogs = blogs
+            };
+            return View(blogList);
+        }
 
 
-        //[Route("blog/post/{urlParam}")]
-        //[AllowAnonymous]
-        //public ActionResult Details(string urlParam)
-        //{
-         
-        //    Blog blog = db.Blogs.FirstOrDefault(c=>c.UrlParam==urlParam);
-        //    if (blog == null)
-        //    {
-        //        return Redirect("/blog");
-        //    }
+        [Route("blog/{urlParam}")]
+        [AllowAnonymous]
+        public ActionResult ListByGroup(string urlParam)
+        {
+            BlogGroup blogGroup = db.BlogGroups.FirstOrDefault(c => c.UrlParam == urlParam && c.IsActive);
 
-        //    blog.Visit++;
-        //    db.SaveChanges();
+            if (blogGroup == null)
+                return Redirect("/blog");
 
-        //    BlogDetailViewModel detail = new BlogDetailViewModel()
-        //    {
-        //        Blog = blog,
-        //        BlogComments = db.BlogComments.Where(c => c.BlogId == blog.Id && c.IsActive && c.IsDeleted == false).ToList(),
-        //        SidebarBlogGroups = db.BlogGroups.Where(c =>  c.IsActive && c.IsDeleted == false).ToList(),
-        //        SidebarRecentBlogs = db.Blogs.Where(c => c.IsActive && c.IsDeleted == false).OrderByDescending(c=>c.CreationDate).Take(4).ToList(),
-        //        NextBlog = GetNeighbourBlogs("next",blog),
-        //       PrevBlog =  GetNeighbourBlogs("prev",blog),
+            List<Blog> blogs = db.Blogs.Where(c => c.BlogGroupId == blogGroup.Id && c.IsDeleted == false && c.IsActive)
+                .OrderByDescending(c => c.CreationDate).ToList();
 
-        //    };
+            BlogListViewModel blogList = new BlogListViewModel()
+            {
+                Blogs = blogs,
+                BlogGroup = blogGroup
+            };
+            return View(blogList);
+        }
 
-        //    return View(detail);
-        //}
+
+        [Route("blog/post/{urlParam}")]
+        [AllowAnonymous]
+        public ActionResult Details(string urlParam)
+        {
+
+            Blog blog = db.Blogs.FirstOrDefault(c => c.UrlParam == urlParam);
+            if (blog == null)
+            {
+                return Redirect("/blog");
+            }
+
+            blog.Visit++;
+            db.SaveChanges();
+
+            BlogDetailViewModel detail = new BlogDetailViewModel()
+            {
+                Blog = blog,
+                BlogComments = db.BlogComments.Where(c => c.BlogId == blog.Id && c.IsActive && c.IsDeleted == false).ToList(),
+                SidebarBlogGroups = GetSidebarBlogGroups(),
+                SidebarBlogs = GetSidebarBlogs(),
+                RelatedBlog = GetRelatedBlogs( blog.BlogGroupId), 
+
+            };
+
+            return View(detail);
+        }
+
+        public List<BlogGroupItemViewModel> GetSidebarBlogGroups()
+        {
+            List<BlogGroupItemViewModel> result = new List<BlogGroupItemViewModel>();
+
+            var blogGroups = db.BlogGroups.Where(c => c.IsDeleted == false && c.IsActive).Select(c => new
+            {
+                c.Id,
+                c.Title,
+                c.UrlParam
+            });
+
+            foreach (var blogGroup in blogGroups)
+            {
+                int blogCount =
+                    db.Blogs.Count(c => c.BlogGroupId == blogGroup.Id && c.IsDeleted == false && c.IsActive);
+
+                result.Add(new BlogGroupItemViewModel()
+                {
+                    Title = blogGroup.Title,
+                    UrlParam = blogGroup.UrlParam,
+                    BlogCount = blogCount
+                });
+            }
+            return result;
+        }
+        public List<BlogItemViewModel> GetSidebarBlogs()
+        {
+            List<BlogItemViewModel> result = new List<BlogItemViewModel>();
+
+            var blogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate)
+                .Select(c => new
+                {
+                    c.CreationDate,
+                    c.Id,
+                    c.ImageUrl,
+                    c.Title,
+                    c.UrlParam,
+                    c.CommentCount
+                }).Take(4);
+
+            foreach (var blog in blogs)
+            {
+                result.Add(new BlogItemViewModel()
+                {
+                    Id = blog.Id,
+                    Title = blog.Title,
+                    UrlParam = blog.UrlParam,
+                    ImageUrl = blog.ImageUrl,
+                    CommentCount = blog.CommentCount,
+                    CreationDateStr = blog.CreationDate.ToShortDateString()
+                });
+            }
+
+            return result;
+        }
+
+        public List<BlogItemViewModel> GetRelatedBlogs(Guid groupId)
+        {
+            List<BlogItemViewModel> result = new List<BlogItemViewModel>();
+
+            var blogs = db.Blogs.Where(c =>c.BlogGroupId== groupId&& c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate)
+                .Select(c => new
+                {
+                    c.CreationDate,
+                    c.Id,
+                    c.ImageUrl,
+                    c.Title,
+                    c.UrlParam,
+                    c.CommentCount,
+                    c.Summery
+                }).Take(2);
+
+            foreach (var blog in blogs)
+            {
+                result.Add(new BlogItemViewModel()
+                {
+                    Id = blog.Id,
+                    Title = blog.Title,
+                    UrlParam = blog.UrlParam,
+                    ImageUrl = blog.ImageUrl,
+                    CommentCount = blog.CommentCount,
+                    CreationDateStr = blog.CreationDate.ToShortDateString(),
+                    Summery = blog.Summery
+                });
+            }
+
+            return result;
+        }
 
         //[AllowAnonymous]
         //public Blog GetNeighbourBlogs(string type, Blog blog)
