@@ -2,20 +2,20 @@
 @model ViewModels.ProductDetailViewModel
 
 @{
-		
+		ViewBag.Description = "خرید " + Model.ProductSize.Product.Title + " در فروشگاه آنلاین فرش مشهد، ارائه دهنده انواع فرش های ماشینی با ارزان ترین قیمت و ارسال رایگان به سراسر کشور.";
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
- <!-- START SECTION BREADCRUMB -->
+<!-- START SECTION BREADCRUMB -->
 <div class="breadcrumb_section bg_gray page-title-mini">
 	<div class="container">
 		<!-- STRART CONTAINER -->
 		<div class="row align-items-center">
 			<div class="col-md-6">
 				<div class="page-title">
-			
-						<h1>@Model.ProductSize.Product.Title</h1>
-				
+
+					<h1>@Model.ProductSize.Product.Title</h1>
+
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -44,23 +44,23 @@
 							</a>
 						</div>
 						<div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
-						
-						 
+
+
 							<div class="item">
 								<a href="#" class="product_gallery_item active" data-image="@Model.ProductSize.Product.ImageUrl" data-zoom-image="@Model.ProductSize.Product.ImageUrl">
-									<img src="@Model.ProductSize.Product.ImageUrl" alt="@Model.ProductSize.Product.Title"/>
+									<img src="@Model.ProductSize.Product.ImageUrl" alt="@Model.ProductSize.Product.Title" />
 								</a>
 							</div>
-									@foreach (var img in Model.ProductImages)
-									{
-										 
-											<div class="item">
-												<a href="#" class="product_gallery_item" data-image="@img.ImageUrl" data-zoom-image="@img.ImageUrl">
-													<img src="@img.ImageUrl" alt="@Model.ProductSize.Product.Title" />
-												</a>
-											</div>
-										 
-									}
+							@foreach (var img in Model.ProductImages)
+							{
+
+									<div class="item">
+										<a href="#" class="product_gallery_item" data-image="@img.ImageUrl" data-zoom-image="@img.ImageUrl">
+											<img src="@img.ImageUrl" alt="@Model.ProductSize.Product.Title" />
+										</a>
+									</div>
+
+							}
 
 						</div>
 					</div>
@@ -70,19 +70,19 @@
 						<div class="product_description">
 							<h4 class="product_title"><a href="#">@Model.ProductSize.Product.Title</a></h4>
 							<div class="product_price">
-								
+
 								@if (Model.ProductSize.IsInPromotion)
 								{
-									<span class="price">@Model.ProductSize.DiscountAmountStr</span>
-									<del>@Model.ProductSize.AmountStr</del>
+										<span class="price">@Model.ProductSize.DiscountAmountStr</span>
+										<del>@Model.ProductSize.AmountStr</del>
 								}
 								else
 								{
-									<span class="price">@Model.ProductSize.AmountStr</span>
+										<span class="price">@Model.ProductSize.AmountStr</span>
 								}
 
 							</div>
-							 
+
 							<div class="pr_desc">
 								@Html.Raw(Model.ProductSize.Product.Body)
 							</div>
@@ -102,11 +102,11 @@
 									{
 										if (color.IsActive)
 										{
-										<span class="active" data-color="#@color.HexCode"></span>}
+													<span class="active" data-color="#@color.HexCode"></span>}
 										else
 										{
 													<a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam/@color.Code"><span data-color="#@color.HexCode"></span></a>
-										}
+}
 									}
 								</div>
 							</div>
@@ -117,16 +117,16 @@
 									{
 										if (size.IsActive)
 										{
-											<span class="active">@size.Title</span>
+													<span class="active">@size.Title</span>
 }
 										else
 										{
-											<a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam/@Model.ProductSize.Product.Code?productSizeId=@size.Id">
-												<span>@size.Title</span>
-											</a>
-														}
-														}
-</div>
+													<a href="/carpet-online-shopping/@Model.ProductSize.Product.ProductGroup.UrlParam/@Model.ProductSize.Product.Code?productSizeId=@size.Id">
+														<span>@size.Title</span>
+													</a>
+}
+									}
+								</div>
 							</div>
 						</div>
 						<hr />
@@ -140,7 +140,7 @@
 							</div>
 							<div class="cart_btn">
 								<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@ViewBag.productSizeId')" type="button"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</button>
-					
+
 							</div>
 						</div>
 						<hr />
@@ -153,52 +153,52 @@
 					</div>
 				</div>
 			</div>
-		<div class="row">
-			<div class="col-12">
-				<div class="large_divider clearfix"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<div class="small_divider"></div>
-				<div class="divider"></div>
-				<div class="medium_divider"></div>
-			</div>
-		</div>
 			<div class="row">
 				<div class="col-12">
-				
+					<div class="large_divider clearfix"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="small_divider"></div>
+					<div class="divider"></div>
+					<div class="medium_divider"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+
 					<div class="" id="Reviews">
 						<div class="comments">
 							<h5 class="product_tab_title">@Model.ProductComments.Count() نظر برای<span>@Model.ProductSize.Product.Title</span></h5>
 							<ul class="list_none comment_list mt-4">
-							
+
 								@foreach (var comment in Model.ProductComments)
 								{
-									<li>
-										<div class="comment_img">
-											<img src="/assets/images/user1.jpg" alt="user1" />
-										</div>
-										<div class="comment_block">
-											 
-											<p class="customer_meta">
-												<span class="review_author">@comment.Name</span>
-												<span class="comment-date">@comment.CreationDateStr</span>
-											</p>
-											<div class="description">
-												<p>@comment.Message</p>
+										<li>
+											<div class="comment_img">
+												<img src="/assets/images/user1.jpg" alt="user1" />
 											</div>
-										</div>
-									</li>
+											<div class="comment_block">
+
+												<p class="customer_meta">
+													<span class="review_author">@comment.Name</span>
+													<span class="comment-date">@comment.CreationDateStr</span>
+												</p>
+												<div class="description">
+													<p>@comment.Message</p>
+												</div>
+											</div>
+										</li>
 								}
-							
-				 
+
+
 							</ul>
 						</div>
 						<div class="review_form field_form">
 							<h5>ثبت نظر جدید</h5>
 							<div class="row mt-3">
-							 
+
 								<div class="form-group col-12">
 									<textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4"></textarea>
 								</div>
@@ -218,70 +218,70 @@
 				</div>
 			</div>
 			<div class="row">
-			<div class="col-12">
-				<div class="small_divider"></div>
-				<div class="divider"></div>
-				<div class="medium_divider"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<div class="heading_s1">
-					<h3>محصولات مرتبط</h3>
+				<div class="col-12">
+					<div class="small_divider"></div>
+					<div class="divider"></div>
+					<div class="medium_divider"></div>
 				</div>
-				<div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-				@foreach (var product in Model.RelatedProducts)
-				{
-					<div class="item">
-						<div class="product">
-							<div class="product_img">
-								<a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">
-									<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
-								</a>
-								<div class="product_action_box">
-									<ul class="list_none pr_action_btn">
-										@foreach (var size in product.Sizes)
-										{
-											<li><a href="#"><span>@size</span></a></li>
-										}
-									</ul>
-								</div>
-							</div>
-							<div class="product_info">
-								<h6 class="product_title"><a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">@product.Product.Title</a></h6>
-								<div class="product_price">
-									@if (product.Product.IsInPromotion)
-									{
-										<span class="price">@product.Product.DiscountAmountStr</span>
-										<del>@product.Product.AmountStr</del>
-									}
-									else
-									{
-										<span class="price">@product.Product.AmountStr</span>
-									}
-								</div>
-										 
-								<div class="card-btn">
-									<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">مشاهده محصول</a>
-								</div>
-							</div>
-						</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="heading_s1">
+						<h3>محصولات مرتبط</h3>
 					</div>
-				}
-				
-				 
+					<div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
+						@foreach (var product in Model.RelatedProducts)
+						{
+								<div class="item">
+									<div class="product">
+										<div class="product_img">
+											<a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">
+												<img src="@product.Product.ImageUrl" alt="@product.Product.Title">
+											</a>
+											<div class="product_action_box">
+												<ul class="list_none pr_action_btn">
+													@foreach (var size in product.Sizes)
+													{
+															<li><a href="#"><span>@size</span></a></li>
+}
+												</ul>
+											</div>
+										</div>
+										<div class="product_info">
+											<h6 class="product_title"><a href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">@product.Product.Title</a></h6>
+											<div class="product_price">
+												@if (product.Product.IsInPromotion)
+												{
+														<span class="price">@product.Product.DiscountAmountStr</span>
+														<del>@product.Product.AmountStr</del>
+}
+												else
+												{
+														<span class="price">@product.Product.AmountStr</span>
+}
+											</div>
+
+											<div class="card-btn">
+												<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.Product.ProductGroup.UrlParam/@product.Product.Code">مشاهده محصول</a>
+											</div>
+										</div>
+									</div>
+								</div>
+						}
+
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
 
 </div>
 
 
 @section scripts{
-	
-<script src="~/Scripts/function.js"></script>
+
+	<script src="~/Scripts/function.js"></script>
 }

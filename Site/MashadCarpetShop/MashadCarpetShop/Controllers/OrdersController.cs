@@ -8,11 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 //using Helpers;
 using Models;
+using ViewModels;
+
 //using ViewModels;
 
 namespace MashadCarpetShop.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class OrdersController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -53,30 +55,30 @@ namespace MashadCarpetShop.Controllers
             return View(orders);
         }
 
-        // GET: OrderDetails/Details/5
-        //public ActionResult Details(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Order order = db.Orders.Find(id);
-        //    if (order == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+       
+        public ActionResult Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = db.Orders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
 
-        //    List<OrderDetail> orderDetails = db.OrderDetails.Include(current => current.Product).Where(current => current.OrderId == order.Id).ToList();
+            List<OrderDetail> orderDetails = db.OrderDetails.Include(current => current.ProductSize).Where(current => current.OrderId == order.Id).ToList();
 
-        //    OrderDetailViewModel orderDetailViewModel = new OrderDetailViewModel()
-        //    {
-        //        Order = order,
-        //        OrderDetails = orderDetails
-        //    };
-        //    ViewBag.OrderStatusId = new SelectList(db.OrderStatuses, "Id", "Title", order.OrderStatusId);
+            OrderDetailViewModel orderDetailViewModel = new OrderDetailViewModel()
+            {
+                Order = order,
+                OrderDetails = orderDetails
+            };
+            ViewBag.OrderStatusId = new SelectList(db.OrderStatuses, "Id", "Title", order.OrderStatusId);
 
-        //    return View(orderDetailViewModel);
-        //}
+            return View(orderDetailViewModel);
+        }
 
         // GET: Orders/Create
         public ActionResult Create()

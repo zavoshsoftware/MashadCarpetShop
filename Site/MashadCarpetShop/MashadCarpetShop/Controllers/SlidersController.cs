@@ -11,7 +11,7 @@ using Models;
 
 namespace MashadCarpetShop.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class SlidersController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

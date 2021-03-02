@@ -33,11 +33,15 @@
 					<div class="login_wrap">
 						<div class="padding_eight_all bg-white">
 							<div class="heading_s1">
-								<h3>ورود</h3>
+								<h3>ثبت نام</h3>
 							</div>
 							@if (TempData["WrongPass"] != null)
 							{
 								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongPass"]</p>
+							}
+							@if (TempData["wrongCellnumber"] != null)
+							{
+								<p class="alert alert-danger" id="wrongEmail">@TempData["wrongCellnumber"]</p>
 							}
 						@using (Html.BeginForm("Register", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "panel-body wrapper-lg", role = "form"}))
 						{
@@ -45,16 +49,16 @@
 								@Html.AntiForgeryToken()
 								@Html.ValidationSummary(false, "", new { @class = "alert-danger" })
 								<div class="form-group">
-									<input type="text" required="" class="form-control" name="FullName" placeholder="نام و نام خانوادگی">
+									<input type="text" class="form-control" name="FullName" placeholder="نام و نام خانوادگی*">
 								</div>	
 								<div class="form-group">
-									<input type="text" required="" class="form-control" name="Email" placeholder="ایمیل">
+									<input type="text" class="form-control" name="Email" placeholder="ایمیل">
 								</div>
 								<div class="form-group">
-									<input type="text" required="" class="form-control" name="Username" placeholder="شماره موبایل">
+									<input type="text" class="form-control" name="Username" placeholder="شماره موبایل*">
 								</div>
 								<div class="form-group">
-									<input class="form-control" required="" type="password" name="Password" placeholder="کلمه عبور">
+									<input class="form-control" type="password" name="Password" placeholder="کلمه عبور*">
 								</div>
 								@*<div class="login_footer form-group">
 									<div class="chek-form">

@@ -40,8 +40,11 @@ namespace Models
         public DbSet<ContactUsForm> ContactUsForms { get; set; }
         public DbSet<PaymentUniqeCode> PaymentUniqeCodes { get; set; }
         public DbSet<Payment> Payments { get; set; }
-
         public System.Data.Entity.DbSet<Models.TextItemType> TextItemTypes { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<TempColor> TempColors { get; set; }
+        public DbSet<TempSize> TempSizes { get; set; }
+        public DbSet<TempStore> TempStore { get; set; }
+        public DbSet<Branch> Branches { get; set; }
     }
 }

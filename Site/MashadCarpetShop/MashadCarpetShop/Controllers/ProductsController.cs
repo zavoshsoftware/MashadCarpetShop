@@ -20,12 +20,14 @@ namespace MashadCarpetShop.Controllers
 
         #region CRUD
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var products = db.Products.Where(p => p.ParentId != null && p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
             return View(products.ToList());
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.ColorId = new SelectList(db.Colors, "Id", "Title");
@@ -36,6 +38,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(Product product, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
@@ -54,6 +57,7 @@ namespace MashadCarpetShop.Controllers
                     product.ImageUrl = newFilenameUrl;
                 }
                 #endregion
+
                 Guid? parentId = GetParentIdByDesignNoAndColor(product.DesignNo);
                 string colorTitle = db.Colors.Find(product.ColorId).Title;
 
@@ -130,6 +134,7 @@ namespace MashadCarpetShop.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -150,6 +155,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Product product, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
@@ -189,6 +195,7 @@ namespace MashadCarpetShop.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -205,6 +212,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(Guid id)
         {
             Product product = db.Products.Find(id);
@@ -239,7 +247,7 @@ namespace MashadCarpetShop.Controllers
                 return Redirect("/carpet-online-shopping");
 
             List<Product> products = db.Products.Where(c =>
-                   /* c.ProductGroupId == productGroup.Id &&*/ c.ParentId != null && c.IsDeleted == false && c.IsActive)
+                    c.ProductGroupId == productGroup.Id && c.ParentId != null && c.IsDeleted == false && c.IsActive)
                 .ToList();
 
             ProductListViewModel result = new ProductListViewModel()
@@ -293,6 +301,8 @@ namespace MashadCarpetShop.Controllers
             if (product == null)
                 return Redirect("/carpet-online-shopping");
 
+            if (product.ProductGroup.UrlParam != groupUrlParam)
+                return RedirectPermanent("/carpet-online-shopping/" + product.ProductGroup.UrlParam + "/" + code);
 
             if (productSizeId == null)
             {
@@ -302,9 +312,9 @@ namespace MashadCarpetShop.Controllers
             else
             {
                 productSize =
-                    db.ProductSizes.FirstOrDefault(c => c.Id==productSizeId.Value);
+                    db.ProductSizes.FirstOrDefault(c => c.Id == productSizeId.Value);
             }
-          
+
             ProductDetailViewModel result = new ProductDetailViewModel()
             {
                 ProductSize = productSize,
@@ -324,8 +334,10 @@ namespace MashadCarpetShop.Controllers
                 ProductImages = db.ProductImages.Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive).ToList()
             };
 
-            if(productSize!=null)
+            if (productSize != null)
                 ViewBag.Title = productSize.Product.Title;
+
+            ViewBag.Canonical = "https://www.mashadcarpet.com/carpet-online-shopping/" + groupUrlParam + "/" + code;
             return View(result);
         }
 

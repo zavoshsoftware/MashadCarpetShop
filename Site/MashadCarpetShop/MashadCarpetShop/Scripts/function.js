@@ -1,5 +1,5 @@
 ﻿function submitBlogComment(id) {
- 
+
 
     var nameVal = $("#name").val();
     var emailVal = $("#email").val();
@@ -122,6 +122,26 @@ function AppearButton() {
     $('#btnPayment').css('display', 'block');
 }
 
+
+function GetRefIdFromResult(result) {
+    var refId = result.split('-')[1];
+    return refId;
+}
+
+function postRefId(refIdValue) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", "https://bpm.shaparak.ir/pgwchannel/startpay.mellat");
+    form.setAttribute("target", "_self");
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("name", "RefId");
+    hiddenField.setAttribute("value", refIdValue);
+    form.appendChild(hiddenField);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+}
+
 function finalizeOrder() {
     DisappearButton();
     var orderNotes = $('#note').val();
@@ -163,14 +183,16 @@ function finalizeOrder() {
 
                 }
 
-               
+
                 else if (result === 'emptyBasket') {
 
                     window.location = "/checkout";
 
                 }
-                else if (result !== "false") {
-                    window.location = result;
+                else if (result.includes('true')) {
+                    var refffid = GetRefIdFromResult(result);
+
+                    postRefId(refffid);
                 }
 
                 else {

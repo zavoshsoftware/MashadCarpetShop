@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using SmsIrRestful;
 
 namespace MashadCarpetShop.Controllers
 {
@@ -102,6 +103,22 @@ namespace MashadCarpetShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                string englishcellNumber = "";
+                foreach (char ch in model.Username)
+                {
+                    englishcellNumber += char.GetNumericValue(ch);
+                }
+                model.Username = englishcellNumber;
+                
+                bool isValidMobile = Regex.IsMatch(model.Username, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);
+
+                if (!isValidMobile)
+                {
+                    TempData["wrongCellnumber"] = "شماره موبایل وارد شده صحیح نمی باشد.";
+                    return View(model);
+                }
+
+
                 User oUser = db.Users.Include(u => u.Role)
                     .FirstOrDefault(a => a.CellNum == model.Username && a.IsDeleted == false);
 
@@ -109,7 +126,7 @@ namespace MashadCarpetShop.Controllers
                 {
                     User user = new User()
                     {
-                        Id=Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         FullName = model.FullName,
                         CellNum = model.Username,
                         Password = model.Password,
@@ -160,6 +177,91 @@ namespace MashadCarpetShop.Controllers
                 HttpContext.GetOwinContext().Authentication.SignOut();
             }
             return RedirectToAction("index", "Home");
+        }
+
+
+
+
+        [Route("RecoverPassword")]
+        public ActionResult RecoverPassword()
+        {
+
+            RecoverPasswordViewModel result = new RecoverPasswordViewModel();
+            return View(result);
+
+        }
+
+        [Route("RecoverPassword")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Guid customerRoleId = new Guid("DFBAD6B3-C605-4DD9-8DB1-2659D38D7AEC");
+                User oUser = db.Users.Include(u => u.Role)
+                    .FirstOrDefault(a =>
+                        a.CellNum == model.CellNumber && a.RoleId == customerRoleId && a.IsDeleted == false);
+                
+                if (oUser != null)
+                {
+                    string pass = RandomCode();
+                    oUser.Password = pass;
+                    oUser.LastModifiedDate = DateTime.Now;
+                    oUser.Description += "password change in " + DateTime.Now + " to " + pass;
+
+                    db.SaveChanges();
+
+                    SendSms(oUser.CellNum, pass);
+                    TempData["success"] = "کلمه عبور برای شما از طریق پیامک ارسال شد.";
+                }
+                else
+                {
+                    // invalid username or password
+                    TempData["WrongPass"] = "این شماره موبایل در سایت ثبت نام نکرده است. لطفا در سایت ثبت نام کنید.";
+                }
+            }
+
+
+            return View(model);
+        }
+        public string RandomCode()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 100000).ToString("D5");
+            return (r);
+        }
+
+
+        public void SendSms(string cellNumber, string code)
+        {
+            var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
+
+            var ultraFastSend = new UltraFastSend()
+            {
+                Mobile = Convert.ToInt64(cellNumber),
+                TemplateId = 44159,
+                ParameterArray = new List<UltraFastParameters>()
+                {
+                    new UltraFastParameters()
+                    {
+                        Parameter = "verifyCode" , ParameterValue = code
+                    }
+                }.ToArray()
+
+            };
+
+            UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
+
+            if (ultraFastSendRespone.IsSuccessful)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

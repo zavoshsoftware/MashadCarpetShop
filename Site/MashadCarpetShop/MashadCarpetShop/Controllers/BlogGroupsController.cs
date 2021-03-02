@@ -10,6 +10,7 @@ using Models;
 
 namespace MashadCarpetShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BlogGroupsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

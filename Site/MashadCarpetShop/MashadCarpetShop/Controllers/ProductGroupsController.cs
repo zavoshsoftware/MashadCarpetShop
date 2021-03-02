@@ -8,9 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace MashadCarpetShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductGroupsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -163,6 +165,17 @@ namespace MashadCarpetShop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [Route("carpet-online-shopping")]
+        public ActionResult List()
+        {
+            ProductGroupListViewModel result = new ProductGroupListViewModel()
+            {
+                ProductGroups = db.ProductGroups.Where(a => a.IsDeleted == false).OrderByDescending(a => a.CreationDate)
+                    .ToList(),
+            };
+            return View(result);
         }
     }
 }

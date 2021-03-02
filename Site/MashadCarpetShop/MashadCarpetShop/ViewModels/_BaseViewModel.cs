@@ -13,7 +13,8 @@ namespace ViewModels
         private BaseViewModelHelper baseviewmodel = new BaseViewModelHelper();
 
         public List<ProductGroupMenuItems> MenuItems { get { return baseviewmodel.GetMenuProductGroup(); } }
- 
+        public bool IsAuthenticate { get { return baseviewmodel.GetAuthenticationStatus(); } }
+
         public string UserFullName { get { return baseviewmodel.GetAuthenticateUserName(); } }
         public string UserRole { get { return baseviewmodel.GetRoleTitle(); } }
     }

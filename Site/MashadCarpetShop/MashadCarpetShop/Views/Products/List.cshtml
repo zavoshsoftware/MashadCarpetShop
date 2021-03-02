@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = Model.ProductGroupTitle;
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+	ViewBag.Description = "خرید "+Model.ProductGroupTitle+" در فروشگاه آنلاین فرش مشهد، ارائه دهنده انواع فرش های ماشینی با ارزان ترین قیمت و ارسال رایگان به سراسر کشور.";
+	ViewBag.Canonical = "https://www.mashadcarpet.com/carpet-online-shopping/"+Model.ProductGroupUrlParam;
 }
 
  
@@ -112,7 +114,7 @@
 			 
 
 					</div>
-					<div class="row">
+					@*<div class="row">
 						<div class="col-12">
 							<ul class="pagination mt-3 justify-content-center pagination_style1">
 								<li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -121,7 +123,7 @@
 								<li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
 							</ul>
 						</div>
-					</div>
+					</div>*@
 				</div>
 			</div>
 		</div>

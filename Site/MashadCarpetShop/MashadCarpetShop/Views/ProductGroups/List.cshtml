@@ -1,0 +1,61 @@
+﻿@model ViewModels.ProductGroupListViewModel
+@{
+		ViewBag.Title = "فروش اینترنتی فرش ماشینی";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Description = "خرید فرش در فروشگاه آنلاین فرش مشهد، ارائه دهنده انواع فرش های ماشینی با ارزان ترین قیمت و ارسال رایگان به سراسر کشور.";
+		ViewBag.Canonical = "https://www.mashadcarpet.com/carpet-online-shopping";
+}
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>فروش اینترنتی فرش ماشینی</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">فروش اینترنتی فرش ماشینی</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+
+					<div class="row shop_container grid">
+
+						@foreach (var product in Model.ProductGroups)
+						{
+								<div class="col-lg-3 col-md-4 col-6">
+									<div class="product">
+										<div class="">
+											<a href="/carpet-online-shopping/@product.UrlParam">
+												<img src="@product.ImageUrl" alt="@product.Title">
+											</a>
+										</div>
+										<div class="product_info">
+											<h6 class="product_title" style="white-space: inherit;"><a href="/carpet-online-shopping/@product.UrlParam">@product.Title</a></h6>
+											<div class="card-btn">
+												<a class="btn btn-fill-out rounded-0" href="/carpet-online-shopping/@product.UrlParam">مشاهده محصولات</a>
+											</div>
+										</div>
+									</div>
+								</div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+</div>

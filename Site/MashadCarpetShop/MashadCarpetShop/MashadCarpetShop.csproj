@@ -44,14 +44,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\Kendo.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibExcel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\LibExcel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -89,6 +102,57 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SmsIrRestful, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmsIrRestful.1.1.3\lib\SmsIrRestful.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Data, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Map, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Map.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Check, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.Check.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Helper, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.Helper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Mvc, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Web, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.WebDesign, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.WebDesign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Svg, Version=2.4.3.29446, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Svg.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -149,6 +213,7 @@
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -215,97 +280,22 @@
     <Content Include="assets\images\about_img.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\amarican_express.png" />
-    <Content Include="assets\images\banner1.jpg" />
+    <Content Include="assets\images\avatar.png" />
+    <Content Include="assets\images\avatar_default.jpg" />
     <Content Include="assets\images\banner10.jpg" />
     <Content Include="assets\images\banner11.jpg" />
     <Content Include="assets\images\banner1111.jpg" />
     <Content Include="assets\images\banner12.jpg" />
-    <Content Include="assets\images\banner13.jpg" />
-    <Content Include="assets\images\banner14.jpg" />
-    <Content Include="assets\images\banner15.jpg" />
     <Content Include="assets\images\banner16.jpg" />
     <Content Include="assets\images\banner17.jpg" />
     <Content Include="assets\images\banner18.jpg" />
-    <Content Include="assets\images\banner2.jpg" />
-    <Content Include="assets\images\banner3.jpg" />
-    <Content Include="assets\images\banner4.jpg" />
-    <Content Include="assets\images\banner5.jpg" />
-    <Content Include="assets\images\banner6.jpg" />
-    <Content Include="assets\images\banner7.jpg" />
-    <Content Include="assets\images\banner8.jpg" />
-    <Content Include="assets\images\banner9.jpg" />
     <Content Include="assets\images\blog\1.jpg" />
     <Content Include="assets\images\blog\2.jpg" />
     <Content Include="assets\images\blog\3.jpg" />
-    <Content Include="assets\images\blog_img1.jpg" />
-    <Content Include="assets\images\blog_img2.jpg" />
-    <Content Include="assets\images\blog_img3.jpg" />
-    <Content Include="assets\images\blog_img4-1.jpg" />
-    <Content Include="assets\images\blog_img4.jpg" />
-    <Content Include="assets\images\blog_img5.jpg" />
-    <Content Include="assets\images\blog_img6-1.jpg" />
-    <Content Include="assets\images\blog_img6.jpg" />
-    <Content Include="assets\images\blog_single_img1.jpg" />
-    <Content Include="assets\images\blog_single_img2.jpg" />
-    <Content Include="assets\images\blog_small_img1.jpg" />
-    <Content Include="assets\images\blog_small_img2.jpg" />
-    <Content Include="assets\images\blog_small_img3.jpg" />
-    <Content Include="assets\images\blog_small_img4-1.jpg" />
-    <Content Include="assets\images\blog_small_img4.jpg" />
-    <Content Include="assets\images\blog_small_img5.jpg" />
-    <Content Include="assets\images\blog_small_img6-1.jpg" />
-    <Content Include="assets\images\blog_small_img6.jpg" />
-    <Content Include="assets\images\blog_small_img7.jpg" />
-    <Content Include="assets\images\blog_small_img8.jpg" />
-    <Content Include="assets\images\cart_thamb1.jpg" />
-    <Content Include="assets\images\cart_thamb2.jpg" />
-    <Content Include="assets\images\cat_img1.png" />
-    <Content Include="assets\images\cat_img2.png" />
-    <Content Include="assets\images\cat_img3.png" />
-    <Content Include="assets\images\cat_img4.png" />
-    <Content Include="assets\images\cat_img5.png" />
-    <Content Include="assets\images\cat_img6.png" />
-    <Content Include="assets\images\cat_img7.png" />
     <Content Include="assets\images\certificates\anjoman-sanaye-nasaji_logo.jpg" />
     <Content Include="assets\images\certificates\dralon_logo_.jpg" />
     <Content Include="assets\images\certificates\iso.jpg" />
     <Content Include="assets\images\certificates\standard logo2.jpg" />
-    <Content Include="assets\images\close.png" />
-    <Content Include="assets\images\cl_logo1.png" />
-    <Content Include="assets\images\cl_logo2.png" />
-    <Content Include="assets\images\cl_logo3.png" />
-    <Content Include="assets\images\cl_logo4.png" />
-    <Content Include="assets\images\cl_logo5.png" />
-    <Content Include="assets\images\cl_logo6.png" />
-    <Content Include="assets\images\cl_logo7.png" />
-    <Content Include="assets\images\discover.png" />
-    <Content Include="assets\images\el_blog_img1.jpg" />
-    <Content Include="assets\images\el_blog_img2.jpg" />
-    <Content Include="assets\images\el_blog_img3.jpg" />
-    <Content Include="assets\images\el_hover_img1.jpg" />
-    <Content Include="assets\images\el_hover_img10.jpg" />
-    <Content Include="assets\images\el_hover_img11.jpg" />
-    <Content Include="assets\images\el_hover_img12.jpg" />
-    <Content Include="assets\images\el_hover_img2.jpg" />
-    <Content Include="assets\images\el_hover_img3.jpg" />
-    <Content Include="assets\images\el_hover_img4.jpg" />
-    <Content Include="assets\images\el_hover_img5.jpg" />
-    <Content Include="assets\images\el_hover_img6.jpg" />
-    <Content Include="assets\images\el_hover_img7.jpg" />
-    <Content Include="assets\images\el_hover_img8.jpg" />
-    <Content Include="assets\images\el_hover_img9.jpg" />
-    <Content Include="assets\images\el_img1.jpg" />
-    <Content Include="assets\images\el_img10.jpg" />
-    <Content Include="assets\images\el_img11.jpg" />
-    <Content Include="assets\images\el_img12.jpg" />
-    <Content Include="assets\images\el_img2.jpg" />
-    <Content Include="assets\images\el_img3.jpg" />
-    <Content Include="assets\images\el_img4.jpg" />
-    <Content Include="assets\images\el_img5.jpg" />
-    <Content Include="assets\images\el_img6.jpg" />
-    <Content Include="assets\images\el_img7.jpg" />
-    <Content Include="assets\images\el_img8.jpg" />
-    <Content Include="assets\images\el_img9.jpg" />
     <Content Include="assets\images\eng.png" />
     <Content Include="assets\images\f1.png" />
     <Content Include="assets\images\f2.png" />
@@ -321,34 +311,6 @@
     <Content Include="assets\images\about\mashadcarpet-value.jpeg" />
     <Content Include="assets\images\favicon.png" />
     <Content Include="assets\images\fn.png" />
-    <Content Include="assets\images\furniture_banner1.jpg" />
-    <Content Include="assets\images\furniture_banner2.jpg" />
-    <Content Include="assets\images\furniture_banner3.jpg" />
-    <Content Include="assets\images\furniture_blog_img1.jpg" />
-    <Content Include="assets\images\furniture_blog_img2.jpg" />
-    <Content Include="assets\images\furniture_blog_img3.jpg" />
-    <Content Include="assets\images\furniture_img1.jpg" />
-    <Content Include="assets\images\furniture_img2.jpg" />
-    <Content Include="assets\images\furniture_img3.jpg" />
-    <Content Include="assets\images\furniture_img4.jpg" />
-    <Content Include="assets\images\furniture_img5.jpg" />
-    <Content Include="assets\images\furniture_img6.jpg" />
-    <Content Include="assets\images\furniture_img7.jpg" />
-    <Content Include="assets\images\furniture_img8.jpg" />
-    <Content Include="assets\images\furniture_insta1.jpg" />
-    <Content Include="assets\images\furniture_insta2.jpg" />
-    <Content Include="assets\images\furniture_insta3.jpg" />
-    <Content Include="assets\images\furniture_insta4.jpg" />
-    <Content Include="assets\images\furniture_insta5.jpg" />
-    <Content Include="assets\images\furniture_insta6.jpg" />
-    <Content Include="assets\images\furniture_insta_small1.jpg" />
-    <Content Include="assets\images\furniture_insta_small2.jpg" />
-    <Content Include="assets\images\furniture_insta_small3.jpg" />
-    <Content Include="assets\images\furniture_insta_small4.jpg" />
-    <Content Include="assets\images\furniture_insta_small5.jpg" />
-    <Content Include="assets\images\furniture_insta_small6.jpg" />
-    <Content Include="assets\images\furniture_insta_small7.jpg" />
-    <Content Include="assets\images\furniture_insta_small8.jpg" />
     <Content Include="assets\images\insta_img1.jpg" />
     <Content Include="assets\images\insta_img2.jpg" />
     <Content Include="assets\images\insta_img3.jpg" />
@@ -368,19 +330,6 @@
     <Content Include="assets\images\marker.png" />
     <Content Include="assets\images\mashadcarpet-about.jpg" />
     <Content Include="assets\images\master_card.png" />
-    <Content Include="assets\images\menu_banner1.jpg" />
-    <Content Include="assets\images\menu_banner11.jpg" />
-    <Content Include="assets\images\menu_banner2.jpg" />
-    <Content Include="assets\images\menu_banner22.jpg" />
-    <Content Include="assets\images\menu_banner3.jpg" />
-    <Content Include="assets\images\menu_banner33.jpg" />
-    <Content Include="assets\images\menu_banner4.jpg" />
-    <Content Include="assets\images\menu_banner5.jpg" />
-    <Content Include="assets\images\menu_banner6.jpg" />
-    <Content Include="assets\images\menu_banner7.jpg" />
-    <Content Include="assets\images\menu_banner8.jpg" />
-    <Content Include="assets\images\menu_banner9.jpg" />
-    <Content Include="assets\images\paypal.png" />
     <Content Include="assets\images\pg\1.jpg" />
     <Content Include="assets\images\pg\2.jpg" />
     <Content Include="assets\images\pg\3.jpg" />
@@ -389,60 +338,8 @@
     <Content Include="assets\images\pg\6.jpg" />
     <Content Include="assets\images\pg\7.jpg" />
     <Content Include="assets\images\pg\8.jpg" />
-    <Content Include="assets\images\popup_img.jpg" />
-    <Content Include="assets\images\popup_img3.jpg" />
-    <Content Include="assets\images\product_img1-2.jpg" />
-    <Content Include="assets\images\product_img1-3.jpg" />
-    <Content Include="assets\images\product_img1-4.jpg" />
-    <Content Include="assets\images\product_img1.jpg" />
-    <Content Include="assets\images\product_img10.jpg" />
-    <Content Include="assets\images\product_img11.jpg" />
-    <Content Include="assets\images\product_img12.jpg" />
-    <Content Include="assets\images\product_img13.jpg" />
-    <Content Include="assets\images\product_img14.jpg" />
-    <Content Include="assets\images\product_img15.jpg" />
-    <Content Include="assets\images\product_img2.jpg" />
-    <Content Include="assets\images\product_img3.jpg" />
-    <Content Include="assets\images\product_img4.jpg" />
-    <Content Include="assets\images\product_img5.jpg" />
-    <Content Include="assets\images\product_img6.jpg" />
-    <Content Include="assets\images\product_img7.jpg" />
-    <Content Include="assets\images\product_img8.jpg" />
-    <Content Include="assets\images\product_img9.jpg" />
-    <Content Include="assets\images\product_small_img1.jpg" />
-    <Content Include="assets\images\product_small_img2.jpg" />
-    <Content Include="assets\images\product_small_img3.jpg" />
-    <Content Include="assets\images\product_small_img4.jpg" />
-    <Content Include="assets\images\product_zoom_img1.jpg" />
-    <Content Include="assets\images\product_zoom_img2.jpg" />
-    <Content Include="assets\images\product_zoom_img3.jpg" />
-    <Content Include="assets\images\product_zoom_img4.jpg" />
     <Content Include="assets\images\p\1.jpg" />
     <Content Include="assets\images\p\2.jpg" />
-    <Content Include="assets\images\shop_banner.jpg" />
-    <Content Include="assets\images\shop_banner1.jpg" />
-    <Content Include="assets\images\shop_banner2.jpg" />
-    <Content Include="assets\images\shop_banner3.jpg" />
-    <Content Include="assets\images\shop_banner4.jpg" />
-    <Content Include="assets\images\shop_banner_img1.jpg" />
-    <Content Include="assets\images\shop_banner_img10.jpg" />
-    <Content Include="assets\images\shop_banner_img11.png" />
-    <Content Include="assets\images\shop_banner_img2.jpg" />
-    <Content Include="assets\images\shop_banner_img3.jpg" />
-    <Content Include="assets\images\shop_banner_img4.jpg" />
-    <Content Include="assets\images\shop_banner_img5.jpg" />
-    <Content Include="assets\images\shop_banner_img6.jpg" />
-    <Content Include="assets\images\shop_banner_img6.png" />
-    <Content Include="assets\images\shop_banner_img7.jpg" />
-    <Content Include="assets\images\shop_banner_img7.png" />
-    <Content Include="assets\images\shop_banner_img8.jpg" />
-    <Content Include="assets\images\shop_banner_img9.jpg" />
-    <Content Include="assets\images\shop_small1.jpg" />
-    <Content Include="assets\images\shop_small2.jpg" />
-    <Content Include="assets\images\shop_small3.jpg" />
-    <Content Include="assets\images\sidebar_banner_img.jpg" />
-    <Content Include="assets\images\sidebar_banner_img1.jpg" />
-    <Content Include="assets\images\sidebar_banner_img2.jpg" />
     <Content Include="assets\images\slide1.jpg" />
     <Content Include="assets\images\slide2.jpg" />
     <Content Include="assets\images\team_img1.jpg" />
@@ -457,15 +354,6 @@
     <Content Include="assets\images\ui-icons_cc0000_256x240.png" />
     <Content Include="assets\images\ui-icons_ffffff_256x240.png" />
     <Content Include="assets\images\us.png" />
-    <Content Include="assets\images\user1.jpg" />
-    <Content Include="assets\images\user2.jpg" />
-    <Content Include="assets\images\user3.jpg" />
-    <Content Include="assets\images\user4.jpg" />
-    <Content Include="assets\images\user_img1.jpg" />
-    <Content Include="assets\images\user_img2.jpg" />
-    <Content Include="assets\images\user_img3.jpg" />
-    <Content Include="assets\images\user_img4.jpg" />
-    <Content Include="assets\images\visa.png" />
     <Content Include="assets\js\imagesloaded.pkgd.min.js" />
     <Content Include="assets\js\isotope-loadmore.js" />
     <Content Include="assets\js\isotope.min.js" />
@@ -488,6 +376,54 @@
     <Content Include="assets\owlcarousel\js\owl.carousel.min.js" />
     <Content Include="assets\Scripts\kendo.modernizr.custom.js" />
     <Content Include="assets\images\slaogan.png" />
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpChargePayRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpCumulativeDynamicPayRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpDynamicPayRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpInquiryRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpPayRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpPosRefundRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpRefundInquiryRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpRefundRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpRefundToPANRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpRefundVerifyRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpReversalRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpSaleReferenceIdRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpSettleRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\MashadCarpetShop.ServiceReference1.bpVerifyRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\Admin\admin-font-awesome.css" />
     <Content Include="Content\Admin\admin-font-awesome.min.css" />
     <Content Include="Content\Admin\AdminStyle.css" />
@@ -841,6 +777,44 @@
     <Content Include="fonts\fontAwesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Localization\ar.xml" />
+    <Content Include="Localization\be.xml" />
+    <Content Include="Localization\bg.xml" />
+    <Content Include="Localization\bh.xml" />
+    <Content Include="Localization\ca-ES.xml" />
+    <Content Include="Localization\cs.xml" />
+    <Content Include="Localization\de.xml" />
+    <Content Include="Localization\el-GR.xml" />
+    <Content Include="Localization\en-GB.xml" />
+    <Content Include="Localization\en.xml" />
+    <Content Include="Localization\es.xml" />
+    <Content Include="Localization\eu-ES.xml" />
+    <Content Include="Localization\fa.xml" />
+    <Content Include="Localization\fr.xml" />
+    <Content Include="Localization\gl-ES.xml" />
+    <Content Include="Localization\hr.xml" />
+    <Content Include="Localization\hu.xml" />
+    <Content Include="Localization\id.xml" />
+    <Content Include="Localization\it.xml" />
+    <Content Include="Localization\ja.xml" />
+    <Content Include="Localization\ka.xml" />
+    <Content Include="Localization\ko.xml" />
+    <Content Include="Localization\lt.xml" />
+    <Content Include="Localization\nb-NO.xml" />
+    <Content Include="Localization\nl.xml" />
+    <Content Include="Localization\pl.xml" />
+    <Content Include="Localization\pt-BR.xml" />
+    <Content Include="Localization\pt.xml" />
+    <Content Include="Localization\ro.xml" />
+    <Content Include="Localization\ru.xml" />
+    <Content Include="Localization\sk.xml" />
+    <Content Include="Localization\sr.xml" />
+    <Content Include="Localization\sv.xml" />
+    <Content Include="Localization\tr.xml" />
+    <Content Include="Localization\uk.xml" />
+    <Content Include="Localization\vi.xml" />
+    <Content Include="Localization\zh-CHS.xml" />
+    <Content Include="Localization\zh-CHT.xml" />
     <Content Include="Scripts\AdminJS\app.v2.js" />
     <Content Include="Scripts\AdminJS\app.v2.min.js" />
     <Content Include="Scripts\AdminJS\jquery-ui-1.10.3.custom.min.js" />
@@ -851,7 +825,14 @@
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
+    <None Include="Connected Services\ServiceReference1\IPaymentGateway.wsdl" />
+    <None Include="Connected Services\ServiceReference1\PaymentGatewayImplService.wsdl" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\Mrt\Invoice.mrt" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -990,14 +971,21 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\BlogCommentsController.cs" />
     <Compile Include="Controllers\BlogGroupsController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\BranchesController.cs" />
     <Compile Include="Controllers\ColorsController.cs" />
     <Compile Include="Controllers\ContactUsFormsController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
+    <Compile Include="Controllers\ExcelDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -1006,14 +994,17 @@
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductSizesController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SizesController.cs" />
     <Compile Include="Controllers\SlidersController.cs" />
+    <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\TextItemsController.cs" />
     <Compile Include="Controllers\TextItemTypesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BankHelper.cs" />
     <Compile Include="Helpers\BaseViewModelHelper.cs" />
     <Compile Include="Helpers\CodeGenerator.cs" />
     <Compile Include="Helpers\DiscountHelper.cs" />
@@ -1039,6 +1030,14 @@
     <Compile Include="Migrations\202012280546405_V05.Designer.cs">
       <DependentUpon>202012280546405_V05.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102271513279_V06.cs" />
+    <Compile Include="Migrations\202102271513279_V06.Designer.cs">
+      <DependentUpon>202102271513279_V06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103020928031_V07.cs" />
+    <Compile Include="Migrations\202103020928031_V07.Designer.cs">
+      <DependentUpon>202103020928031_V07.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1047,6 +1046,7 @@
     <Compile Include="Models\Entities\Blog.cs" />
     <Compile Include="Models\Entities\BlogComment.cs" />
     <Compile Include="Models\Entities\BlogGroup.cs" />
+    <Compile Include="Models\Entities\Branch.cs" />
     <Compile Include="Models\Entities\City.cs" />
     <Compile Include="Models\Entities\Payment.cs" />
     <Compile Include="Models\Entities\PaymentUniqeCode.cs" />
@@ -1066,9 +1066,23 @@
     <Compile Include="Models\Entities\Province.cs" />
     <Compile Include="Models\Entities\Role.cs" />
     <Compile Include="Models\Entities\Slider.cs" />
+    <Compile Include="Models\Entities\TempStore.cs" />
+    <Compile Include="Models\Entities\TempSize.cs" />
+    <Compile Include="Models\Entities\TempColor.cs" />
     <Compile Include="Models\Entities\TextItem.cs" />
     <Compile Include="Models\Entities\TextItemType.cs" />
     <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Models\InvoiceReportViewModel.cs" />
+    <Compile Include="ViewModels\BranchViewModel.cs" />
+    <Compile Include="ViewModels\RecoverPasswordViewModel.cs" />
+    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductGroupListViewModel.cs" />
+    <Compile Include="ViewModels\UploadFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FaqViewModel.cs" />
@@ -1516,7 +1530,6 @@
     <Content Include="Views\ProductGroups\Details.cshtml" />
     <Content Include="Views\ProductGroups\Edit.cshtml" />
     <Content Include="Views\ProductGroups\Index.cshtml" />
-    <Content Include="Uploads\sample-excel.xls" />
     <Content Include="Views\Colors\Create.cshtml" />
     <Content Include="Views\Colors\Delete.cshtml" />
     <Content Include="Views\Colors\Details.cshtml" />
@@ -1555,6 +1568,18 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\ExcelData\Import.cshtml" />
+    <Content Include="Uploads\sample-excel.xls" />
+    <Content Include="Views\Basket\CallBack.cshtml" />
+    <Content Include="Views\Report\Invoice.cshtml" />
+    <Content Include="Views\ProductGroups\List.cshtml" />
+    <Content Include="Views\Branches\Create.cshtml" />
+    <Content Include="Views\Branches\Delete.cshtml" />
+    <Content Include="Views\Branches\Details.cshtml" />
+    <Content Include="Views\Branches\Edit.cshtml" />
+    <Content Include="Views\Branches\Index.cshtml" />
+    <Content Include="Views\Branches\List.cshtml" />
+    <Content Include="Views\Account\RecoverPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1570,6 +1595,8 @@
     <Folder Include="Uploads\Product\" />
     <Folder Include="Uploads\Slider\" />
     <Folder Include="Uploads\text\" />
+    <Folder Include="Views\Payment\" />
+    <Folder Include="Views\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
@@ -1593,6 +1620,21 @@
     <EmbeddedResource Include="Migrations\202012280546405_V05.resx">
       <DependentUpon>202012280546405_V05.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102271513279_V06.resx">
+      <DependentUpon>202102271513279_V06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103020928031_V07.resx">
+      <DependentUpon>202103020928031_V07.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

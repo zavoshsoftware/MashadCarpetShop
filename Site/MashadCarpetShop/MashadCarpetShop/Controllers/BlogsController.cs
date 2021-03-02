@@ -12,11 +12,11 @@ using ViewModels;
 
 namespace MashadCarpetShop.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
     public class BlogsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
 
+    [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var blogs = db.Blogs.Include(b => b.BlogGroup).Where(b => b.IsDeleted == false).OrderByDescending(b => b.CreationDate);
@@ -24,6 +24,7 @@ namespace MashadCarpetShop.Controllers
         }
 
 
+    [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.BlogGroupId = new SelectList(db.BlogGroups, "Id", "Title");
@@ -32,6 +33,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Administrator")]
         public ActionResult Create(Blog blog, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace MashadCarpetShop.Controllers
             return View(blog);
         }
 
+    [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -85,6 +88,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Blog blog, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
@@ -115,6 +119,7 @@ namespace MashadCarpetShop.Controllers
             return View(blog);
         }
 
+    [Authorize(Roles = "Administrator")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -131,6 +136,7 @@ namespace MashadCarpetShop.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(Guid id)
         {
             Blog blog = db.Blogs.Find(id);

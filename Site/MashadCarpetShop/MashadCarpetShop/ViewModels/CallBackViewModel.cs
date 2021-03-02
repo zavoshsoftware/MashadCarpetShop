@@ -11,6 +11,7 @@ namespace ViewModels
         public bool IsSuccess { get; set; }
         public string RefrenceId { get; set; }
         public string OrderCode { get; set; }
+        public string Message { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
 
         public Order Order { get; set; }

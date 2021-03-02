@@ -11,8 +11,8 @@ namespace Models
 
         internal static void Seed(DatabaseContext databaseContext)
         {
-            Guid roleId = Guid.NewGuid();
-            Guid roleId2 = Guid.NewGuid();
+            Guid roleId = new Guid("bb3c1194-272f-4f20-a853-4e7fa3365979");
+            Guid roleId2 = new Guid("00616634-25df-49b4-9c7d-db81e1587e2f");
 
             InsertBaseRole(databaseContext, roleId, roleId2);
             InsertBaseUser(databaseContext, roleId);
@@ -25,7 +25,7 @@ namespace Models
             Role role = new Role()
             {
                 Id = roleId,
-                Title = "مدیر وب سایت",
+                Title = "Administrator",
                 Name = "Administrator",
                 CreationDate = DateTime.Now,
                 IsDeleted = false
@@ -36,7 +36,7 @@ namespace Models
             Role role2 = new Role()
             {
                 Id = roleId2,
-                Title = "مشتری",
+                Title = "Customer",
                 Name = "Customer",
                 CreationDate = DateTime.Now,
                 IsDeleted = false

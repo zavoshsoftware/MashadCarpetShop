@@ -1,0 +1,77 @@
+﻿@model ViewModels.CallBackViewModel
+
+@{
+		ViewBag.Title = "نتیجه پرداخت";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>سبد خرید</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">خانه</a></li>
+					<li class="breadcrumb-item active">نتیجه پرداخت</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_content">
+
+	<div class="section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					@if (Model.IsSuccess)
+					{
+						<div class="text-center order_complete">
+							<i class="fas fa-check-circle"></i>
+							<div class="heading_s1">
+								<h3>پرداخت شما با موفقیت انجام شد.</h3>
+							</div>
+							<p>کاربر گرامی، با تشکر از سفارش شما. همکاران ما جهت هماهنگی ارسال در اسرع وقت با شما تماس خواهند گرفت</p>
+
+
+							<table class="table table-bordered">
+								<tr>
+									<td>کد رهگیری پرداخت:</td>
+									<td>@Model.RefrenceId</td>
+								</tr>
+							</table>
+						</div>
+					}
+					else
+					{
+
+							<div class="text-center order_complete">
+								<i class="fas fa-remove"></i>
+								<div class="heading_s1">
+									<h3>پرداخت شما با خطا روبه رو شد.</h3>
+								</div>
+								<p>@Model.Message</p>
+								<p>متاسفانه پرداخت شما تکمیل نشد. در صورتی که مبلغی از حساب شما کسر شده است، حداکثر تا 24 ساعت آینده به حساب شما بازخواهد گشت</p>
+								 
+							</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@Html.Partial("FrontEnd/_NewsLetterPartial")
+
+
+</div>
+
+<div class="loading-fuulpage">Loading&#8230;</div>
+
+@section scripts{
+	<script src="~/Scripts/function.js"></script>
+}

@@ -141,17 +141,7 @@
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-5">
-							<label class="control-label">
-								@Html.LabelFor(model => model.Order.PaymentDesc, new { @class = "control-label" })
-
-							</label>
-						</div>
-						<div class="col-md-7">
-							@Html.EditorFor(model => model.Order.PaymentDesc)
-						</div>
-					</div>
+			 
 					<div class="row">
 						<div class="col-md-5">
 							<label class="control-label">
@@ -172,16 +162,7 @@
 							@Html.DisplayFor(model => model.Order.SaleReferenceId)
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<label class="control-label">
-								@Html.LabelFor(model => model.Order.PaymentTypeTitle, new { @class = "control-label" })
-							</label>
-						</div>
-						<div class="col-md-7">
-							@Html.DisplayFor(model => model.PaymentTypeTitle)
-						</div>
-					</div>
+		 
 					<div class="row">
 						<div class="col-md-5">
 							<label class="control-label">
@@ -278,23 +259,21 @@
 									<thead>
 										<tr>
 											<th class="text-right">محصول</th>
-											<th class="text-right">بارکد</th>
+											<th class="text-right">سایز</th>
 											<th class="text-right">تعداد</th>
 											<th class="text-right">قیمت</th>
 											<th class="text-right">جمع</th>
-											<th class="text-right">موجودی انبار</th>
 										</tr>
 									</thead>
 									<tbody>
 										@foreach (var detail in Model.OrderDetails)
 										{
 										<tr>
-											<td>@detail.Product.Title</td>
-											<td>@detail.Product.Barcode</td>
+											<td>@detail.ProductSize.Product.Title</td>
+											<td>@detail.ProductSize.Size.Title</td>
 											<td>@detail.Quantity</td>
-											<td>@detail.PriceStr</td>
 											<td>@detail.AmountStr</td>
-											<td>@detail.Product.Stock</td>
+											<td>@detail.RowAmountStr</td>
 										</tr>
 }
 									</tbody>
@@ -311,44 +290,7 @@
 
 		</div>
 
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-info">
-					<div class="panel-heading">ارسال پیامک به مشتری</div>
-					<div class="panel-body">
-						<table class="table table-bordered">
-							<tr>
-								<td>متن پیامک</td>
-								<td>
-									<textarea id="txtUsersms" style="width: 100%;" ></textarea><br/>
-									<button class="btn btn-success" style="margin-top: 20px;" onclick="sendUserSms('@Model.Order.Code');">ارسال پیامک</button>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="panel panel-info">
-					<div class="panel-heading">یادداشت</div>
-					<div class="panel-body">
-						<table class="table table-bordered">
-							<tr>
-								<td>یادداشت بر روی سفارش</td>
-								<td>
-								
-									@Html.EditorFor(model => model.Order.Description)
-									<br/>
-									<dfn>این متن به کاربر نمایش داده نخواهد شد</dfn><br/>
-									<button class="btn btn-success" style="margin-top: 20px;" onclick="postDesc('@Model.Order.Code');">ثبت یادداشت</button>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+ 
 	</div>
 	<div class="loading-fuulpage">Loading&#8230;</div> 
 
