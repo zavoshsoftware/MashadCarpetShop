@@ -112,15 +112,17 @@ namespace Models
         [Display(Name = "IsInHome", ResourceType = typeof(Resources.Models.Product))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInHome { get; set; }
-
-
-
+        
         [Display(Name = "بازدید")]
         public int Visit { get; set; }
 
-
         [Display(Name = "موجود است؟")]
         public bool IsAvailable { get; set; }
+        
+        [Display(Name = "کد واقعیت افزوده")]
+        [DataType(DataType.MultilineText)]
+        [AllowHtml]
+        public string ArCode { get; set; }
 
         public virtual ICollection<ProductComment> ProductComments { get; set; }
 

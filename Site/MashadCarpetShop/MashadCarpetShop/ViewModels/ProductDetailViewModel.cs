@@ -26,6 +26,7 @@ namespace ViewModels
      
     public class ProductColorViewModel
     {
+        public Guid ColorId { get; set; }
         public string HexCode { get; set; }
         public int Code { get; set; }
         public bool IsActive { get; set; }

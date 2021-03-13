@@ -237,7 +237,7 @@ namespace Helper
             db.Payments.Add(payment);
             if (isSuccess)
             {
-                UpdateOrderStatus(db, orderId, SaleRefrenceID); 
+                UpdateOrderStatus(db, orderId, SaleRefrenceID);
 
             }
             db.SaveChanges();
@@ -256,7 +256,8 @@ namespace Helper
 
                 order.SaleReferenceId = saleRefrenceId.ToString();
 
-               // UpdateUserWallet(db, order);
+                order.IsPaid = true;
+                // UpdateUserWallet(db, order);
             }
         }
 
@@ -270,10 +271,10 @@ namespace Helper
         //            user.Amount -= order.WalletAmount;
         //            user.LastModifiedDate=DateTime.Now;
         //        }
-                
+
         //    }
         //}
-   
+
         public static Guid? GetOrderStatusIdByCode(int statusCode)
         {
             DatabaseContext db = new DatabaseContext();

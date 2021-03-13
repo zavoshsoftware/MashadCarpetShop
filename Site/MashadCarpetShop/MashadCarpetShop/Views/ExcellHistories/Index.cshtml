@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Models.ExcellHistory>
+
+@{
+ViewBag.Title = "فهرست ";
+    
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+	              columns.Bound(item => @item.Id).Title("دانلود").Filterable(false).Groupable(false)
+		              .Template(@<text>
+			                        <a href="@item.FileUrl" target="_blank" class="k-button">دانلود</a>
+									 
+									</text>).Width(200);  
+        columns.Bound(model => model.CreationDate);
+				 
+		})
+		.ToolBar(toolbar =>
+					{				
+						toolbar.Custom().Action("Create","ExcellHistorys").Text("افزودن");                          
+					}
+		)         
+		.DataSource(dataSource => dataSource
+									.Server()
+							
+									.Model(model => model.Id(item => item.Id))
+					)              
+	)

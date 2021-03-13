@@ -36,6 +36,12 @@ namespace MashadCarpetShop.Controllers
                         .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                         .Include(o => o.User).ToList();
                 }
+                else if (id == new Guid("a2869F4D-D6D1-134C-A2A1-7945222BD3B0"))
+                {
+                    orders = db.Orders.Include(o => o.City).Where(o => o.IsPaid == true && o.IsDeleted == false)
+                        .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
+                        .Include(o => o.User).ToList();
+                }
                 else
                 {
                     orders = db.Orders.Include(o => o.City).Where(o =>
@@ -55,7 +61,7 @@ namespace MashadCarpetShop.Controllers
             return View(orders);
         }
 
-       
+
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -242,7 +248,7 @@ namespace MashadCarpetShop.Controllers
             if (order != null)
             {
                 order.IsPaid = isPay;
-             
+
                 order.LastModifiedDate = DateTime.Now;
                 db.SaveChanges();
 
@@ -260,7 +266,7 @@ namespace MashadCarpetShop.Controllers
 
             if (order != null)
             {
-             //   SendSms.SendCommonSms(order.User.CellNum, userSms);
+                //   SendSms.SendCommonSms(order.User.CellNum, userSms);
 
             }
             return Json("true", JsonRequestBehavior.AllowGet);

@@ -1,15 +1,20 @@
-﻿@using System.Web.UI.HtmlControls
+﻿
 @model ViewModels.ProductDetailViewModel
 
 @{
-		ViewBag.Description = "خرید " + Model.ProductSize.Product.Title + " در فروشگاه آنلاین فرش مشهد، ارائه دهنده انواع فرش های ماشینی با ارزان ترین قیمت و ارسال رایگان به سراسر کشور.";
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
-
-<!-- START SECTION BREADCRUMB -->
+@section head{
+	<style>
+		#errorDiv, #SuccessDiv {
+			display: none;
+		}
+	</style>
+}
+ 
 <div class="breadcrumb_section bg_gray page-title-mini">
 	<div class="container">
-		<!-- STRART CONTAINER -->
+ 
 		<div class="row align-items-center">
 			<div class="col-md-6">
 				<div class="page-title">
@@ -149,7 +154,15 @@
 							<li>شانه: <a href="#">@Model.ProductSize.Product.Reeds</a></li>
 							<li>تعداد رنگ: <a href="#" rel="tag">@Model.ProductSize.Product.Frame</a> </li>
 						</ul>
-
+						@if (!string.IsNullOrEmpty(Model.ProductSize.Product.ArCode))
+						{
+							<hr/>
+							<h3>مشاهده فرش در منزل شما</h3>
+							<p>برای مشاهده این فرش در منزل خود بر روی باکس زیر کلیک کنید.</p>
+							<div style="width: 100%; height: 100%;">
+							@Html.Raw(Model.ProductSize.Product.ArCode)
+							</div>
+						}
 					</div>
 				</div>
 			</div>
@@ -196,21 +209,26 @@
 							</ul>
 						</div>
 						<div class="review_form field_form">
-							<h5>ثبت نظر جدید</h5>
+							<h5>افزودن نظر</h5>
+							<div>
+								<p class="alert alert-success" id="SuccessDiv">نظر شما با موفقیت ثبت شد و پس از تایید در سایت نمایش داده می شود</p>
+								<p class="alert alert-danger" id="errorDiv"></p>
+							
+							</div>
 							<div class="row mt-3">
-
-								<div class="form-group col-12">
-									<textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4"></textarea>
+								<div class="form-group col-md-6">
+									<input required="required" placeholder="نام و نام خانوادگی *" class="form-control" name="name" type="text" id="commentName">
 								</div>
 								<div class="form-group col-md-6">
-									<input required="required" placeholder="نام *" class="form-control" name="name" type="text">
+									<input required="required" placeholder="ایمیل *" class="form-control" name="email" type="email" id="commentEmail">
 								</div>
-								<div class="form-group col-md-6">
-									<input required="required" placeholder="ایمیل *" class="form-control" name="email" type="email">
+								<div class="form-group col-12">
+									<textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4" id="commentBody"></textarea>
 								</div>
 
+
 								<div class="form-group col-12">
-									<button type="submit" class="btn btn-fill-out" name="button" value="Submit">ثبت نظر</button>
+									<button type="button" onclick="SubmitComment();" class="btn btn-fill-out">ثبت نظر</button>
 								</div>
 							</div>
 						</div>

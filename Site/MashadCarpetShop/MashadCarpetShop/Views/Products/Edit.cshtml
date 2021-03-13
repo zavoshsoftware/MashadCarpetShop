@@ -160,6 +160,14 @@
             </div>
         </div>
 			  
+	    <div class="form-group">
+		    @Html.LabelFor(model => model.ArCode, new { @class = "control-label col-md-2" })
+		    <div class="col-md-10">
+			    @Html.EditorFor(model => model.ArCode)
+
+			    @Html.ValidationMessageFor(model => model.ArCode)
+		    </div>
+	    </div>
         <div class="form-group">
             @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

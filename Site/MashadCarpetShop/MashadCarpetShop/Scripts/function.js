@@ -1,4 +1,40 @@
-﻿function submitBlogComment(id) {
+﻿function SubmitComment() {
+
+
+    var url = window.location.pathname;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+
+    var nameVal = $("#commentName").val();
+    var emailVal = $("#commentEmail").val();
+    var bodyVal = $("#commentBody").val();
+    if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
+        $.ajax(
+            {
+                url: "/ProductComments/SubmitComment",
+                data: { name: nameVal, email: emailVal, body: bodyVal, code: id },
+                type: "GET"
+            }).done(function (result) {
+            if (result === "true") {
+                $("#errorDiv").css('display', 'none');
+                $("#SuccessDiv").css('display', 'block');
+                localStorage.setItem("id", "");
+            }
+            else if (result === "InvalidEmail") {
+                $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
+                $("#errorDiv").css('display', 'block');
+                $("#SuccessDiv").css('display', 'none');
+
+            }
+        });
+    }
+    else {
+        $("#errorDiv").html('تمامی فیلد های زیر را تکمیل نمایید.');
+        $("#errorDiv").css('display', 'block');
+        $("#SuccessDiv").css('display', 'none');
+
+    }
+}
+function submitBlogComment(id) {
 
 
     var nameVal = $("#name").val();

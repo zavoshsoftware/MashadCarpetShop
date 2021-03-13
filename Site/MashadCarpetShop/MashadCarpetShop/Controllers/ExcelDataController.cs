@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -68,28 +69,33 @@ namespace MashadCarpetShop.Controllers
                         {
                             foreach (var row in WorkSheet.RowsUsed())
                             {
-                                
-                                    int designNo = Convert.ToInt32(row.Cell(1).Value.ToString());
-                                    int tedadRang = Convert.ToInt32(row.Cell(5).Value.ToString());
-                                    int amount = Convert.ToInt32(row.Cell(7).Value.ToString());
-                                    int qty = Convert.ToInt32(row.Cell(8).Value.ToString());
 
-                                    if (designNo == 802001)
-                                    {
-                                        int test = 1;
-                                    }
+                                int designNo = Convert.ToInt32(row.Cell(1).Value.ToString());
+                                int tedadRang = Convert.ToInt32(row.Cell(5).Value.ToString());
+                                int amount = Convert.ToInt32(row.Cell(7).Value.ToString());
+                                int qty = Convert.ToInt32(row.Cell(8).Value.ToString());
 
-                                    UpdateRow(designNo,
-                                        row.Cell(2).Value.ToString(),
-                                        row.Cell(3).Value.ToString(),
-                                        row.Cell(4).Value.ToString(),
-                                        tedadRang,
-                                        row.Cell(6).Value.ToString(),
-                                        amount, qty);
+                                if (designNo == 802001)
+                                {
+                                    int test = 1;
+                                }
 
-                                    db.SaveChanges();
-                               
+                                UpdateRow(designNo,
+                                    row.Cell(2).Value.ToString(),
+                                    row.Cell(3).Value.ToString(),
+                                    row.Cell(4).Value.ToString(),
+                                    tedadRang,
+                                    row.Cell(6).Value.ToString(),
+                                    amount, qty);
+
+                                db.SaveChanges();
+
+
+                             
                             }
+                            InsertExcellHistory(UploadFile);
+                            db.SaveChanges();
+
 
                             TempData["success"] = "اطلاعات فایل اکسل با موفقیت بارگزاری شد";
 
@@ -118,6 +124,28 @@ namespace MashadCarpetShop.Controllers
             return View();
         }
 
+        public void InsertExcellHistory(UploadFile UploadFile)
+        {
+            string newFilenameUrl = string.Empty;
+
+            string filename = Path.GetFileName(UploadFile.ExcelFile.FileName);
+            string newFilename = Guid.NewGuid().ToString().Replace("-", string.Empty)
+                                 + Path.GetExtension(filename);
+
+            newFilenameUrl = "/Uploads/product/" + newFilename;
+            string physicalFilename = Server.MapPath(newFilenameUrl);
+            UploadFile.ExcelFile.SaveAs(physicalFilename);
+            ExcellHistory excellHistory = new ExcellHistory()
+            {
+                Id = Guid.NewGuid(),
+                FileUrl = newFilenameUrl,
+                IsDeleted = false,
+                IsActive = true,
+                CreationDate = DateTime.Now
+            };
+
+            db.ExcellHistories.Add(excellHistory);
+        }
         public void test()
         {
             decimal a = Convert.ToDecimal("");
@@ -150,7 +178,7 @@ namespace MashadCarpetShop.Controllers
 
         public void UpdateRow(int designNo, string colorTitle, string size, string shane, int tedadrang, string tarakom, decimal amount, int qty)
         {
- 
+
             CodeGenerator codeGenerator = new CodeGenerator();
             Color color = db.Colors.FirstOrDefault(c => c.Title == colorTitle);
 
@@ -227,11 +255,11 @@ namespace MashadCarpetShop.Controllers
                     Shots = tarakom,
                     Reeds = shane,
                     IsAvailable = true,
-                   
+
                 };
 
                 db.Products.Add(oProductWithColor);
-            
+
                 return oProductWithColor;
             }
             else

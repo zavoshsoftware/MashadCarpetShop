@@ -46,5 +46,6 @@ namespace Models
         public DbSet<TempSize> TempSizes { get; set; }
         public DbSet<TempStore> TempStore { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<ExcellHistory> ExcellHistories { get; set; }
     }
 }

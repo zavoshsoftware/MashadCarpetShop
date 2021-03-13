@@ -73,8 +73,8 @@ namespace MashadCarpetShop.Controllers
             return shipmentAmount;
         }
 
-        [Route("Basket/remove/{code}")]
-        public ActionResult RemoveFromBasket(string code)
+        [Route("Basket/remove/{id:Guid}")]
+        public ActionResult RemoveFromBasket(Guid id)
         {
             string[] coockieItems = GetCookie();
 
@@ -83,7 +83,7 @@ namespace MashadCarpetShop.Controllers
             {
                 string[] coockieItem = coockieItems[i].Split('^');
 
-                if (coockieItem[0] == code)
+                if (new Guid(coockieItem[0]) == id)
                 {
                     string removeArray = coockieItem[0] + "^" + coockieItem[1];
                     coockieItems = coockieItems.Where(current => current != removeArray).ToArray();

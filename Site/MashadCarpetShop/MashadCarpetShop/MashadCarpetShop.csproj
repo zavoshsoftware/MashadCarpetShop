@@ -282,6 +282,7 @@
     <Content Include="assets\images\amarican_express.png" />
     <Content Include="assets\images\avatar.png" />
     <Content Include="assets\images\avatar_default.jpg" />
+    <Content Include="assets\images\banner1.jpg" />
     <Content Include="assets\images\banner10.jpg" />
     <Content Include="assets\images\banner11.jpg" />
     <Content Include="assets\images\banner1111.jpg" />
@@ -289,6 +290,8 @@
     <Content Include="assets\images\banner16.jpg" />
     <Content Include="assets\images\banner17.jpg" />
     <Content Include="assets\images\banner18.jpg" />
+    <Content Include="assets\images\banner2.jpg" />
+    <Content Include="assets\images\banner3.jpg" />
     <Content Include="assets\images\blog\1.jpg" />
     <Content Include="assets\images\blog\2.jpg" />
     <Content Include="assets\images\blog\3.jpg" />
@@ -986,6 +989,7 @@
     <Compile Include="Controllers\ContactUsFormsController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
     <Compile Include="Controllers\ExcelDataController.cs" />
+    <Compile Include="Controllers\ExcellHistoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -1038,6 +1042,14 @@
     <Compile Include="Migrations\202103020928031_V07.Designer.cs">
       <DependentUpon>202103020928031_V07.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103091125076_V08.cs" />
+    <Compile Include="Migrations\202103091125076_V08.Designer.cs">
+      <DependentUpon>202103091125076_V08.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103091425390_V09.cs" />
+    <Compile Include="Migrations\202103091425390_V09.Designer.cs">
+      <DependentUpon>202103091425390_V09.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1048,6 +1060,7 @@
     <Compile Include="Models\Entities\BlogGroup.cs" />
     <Compile Include="Models\Entities\Branch.cs" />
     <Compile Include="Models\Entities\City.cs" />
+    <Compile Include="Models\Entities\ExcellHistory.cs" />
     <Compile Include="Models\Entities\Payment.cs" />
     <Compile Include="Models\Entities\PaymentUniqeCode.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
@@ -1580,6 +1593,11 @@
     <Content Include="Views\Branches\Index.cshtml" />
     <Content Include="Views\Branches\List.cshtml" />
     <Content Include="Views\Account\RecoverPassword.cshtml" />
+    <Content Include="Views\ExcellHistories\Create.cshtml" />
+    <Content Include="Views\ExcellHistories\Delete.cshtml" />
+    <Content Include="Views\ExcellHistories\Details.cshtml" />
+    <Content Include="Views\ExcellHistories\Edit.cshtml" />
+    <Content Include="Views\ExcellHistories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1625,6 +1643,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103020928031_V07.resx">
       <DependentUpon>202103020928031_V07.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103091125076_V08.resx">
+      <DependentUpon>202103091125076_V08.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103091425390_V09.resx">
+      <DependentUpon>202103091425390_V09.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

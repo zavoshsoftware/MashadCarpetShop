@@ -70,6 +70,7 @@ namespace MashadCarpetShop.Controllers
                 product.Visit = 0;
                 product.IsAvailable = false;
                 product.Id = Guid.NewGuid();
+                
                 db.Products.Add(product);
                 db.SaveChanges();
 
@@ -118,7 +119,7 @@ namespace MashadCarpetShop.Controllers
                 Visit = 0,
                 Title = product.Title,
                 TitleEn = product.TitleEn,
-
+                ArCode = product.ArCode,
             };
 
             db.Products.Add(childProduct);
@@ -248,7 +249,7 @@ namespace MashadCarpetShop.Controllers
 
             List<Product> products = db.Products.Where(c =>
                     c.ProductGroupId == productGroup.Id && c.ParentId != null && c.IsDeleted == false && c.IsActive)
-                .ToList();
+                .OrderBy(c=>c.DesignNo).ToList();
 
             ProductListViewModel result = new ProductListViewModel()
             {
@@ -307,7 +308,7 @@ namespace MashadCarpetShop.Controllers
             if (productSizeId == null)
             {
                 productSize =
-                    db.ProductSizes.FirstOrDefault(c => c.ProductId == product.Id && c.Amount == product.Amount);
+                   db.ProductSizes.Where(c => c.ProductId == product.Id).OrderBy(c => c.Amount).FirstOrDefault();
             }
             else
             {
@@ -335,8 +336,10 @@ namespace MashadCarpetShop.Controllers
             };
 
             if (productSize != null)
+            {
                 ViewBag.Title = productSize.Product.Title;
-
+                ViewBag.Description = "خرید " + productSize.Product.Title + " در فروشگاه آنلاین فرش مشهد، ارائه دهنده انواع فرش های ماشینی با ارزان ترین قیمت و ارسال رایگان به سراسر کشور.";
+            }
             ViewBag.Canonical = "https://www.mashadcarpet.com/carpet-online-shopping/" + groupUrlParam + "/" + code;
             return View(result);
         }
@@ -344,7 +347,8 @@ namespace MashadCarpetShop.Controllers
         public List<ProductSizeViewModel> GetProductSizes(Product product, Guid? productSizeId)
         {
             var productSizes = db.ProductSizes
-                .Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive && c.Stock > 0).Select(c =>
+                .Where(c => c.ProductId == product.Id && c.IsDeleted == false && c.IsActive && c.Stock > 0)
+                .OrderBy(c => c.Amount).Select(c =>
                     new
                     {
                         c.Id,
@@ -353,13 +357,16 @@ namespace MashadCarpetShop.Controllers
                     });
 
             List<ProductSizeViewModel> sizes = new List<ProductSizeViewModel>();
-
+            int i = 0;
             foreach (var productSize in productSizes)
             {
                 bool isActive = false;
 
                 if (productSizeId == null)
-                    isActive = productSize.Amount == product.Amount;
+                {
+                    if (i == 0)
+                        isActive = true;
+                }
                 else
                     isActive = productSize.Id == productSizeId;
 
@@ -372,6 +379,8 @@ namespace MashadCarpetShop.Controllers
 
                 if (isActive)
                     ViewBag.productSizeId = productSize.Id;
+
+                i++;
             }
 
             return sizes;
@@ -386,7 +395,8 @@ namespace MashadCarpetShop.Controllers
                         c.Id,
                         c.Code,
                         c.Color.HexCode,
-                        c.Color.Title
+                        c.Color.Title,
+                        colorId = c.Color.Id
                     });
 
             List<ProductColorViewModel> colors = new List<ProductColorViewModel>();
@@ -396,14 +406,17 @@ namespace MashadCarpetShop.Controllers
                 if (db.ProductSizes.Any(c => c.ProductId == oProduct.Id))
                 {
                     bool isActive = oProduct.Id == product.Id;
-
-                    colors.Add(new ProductColorViewModel()
+                    if (!colors.Any(c => c.ColorId == oProduct.colorId))
                     {
-                        IsActive = isActive,
-                        Title = oProduct.Title,
-                        Code = oProduct.Code,
-                        HexCode = oProduct.HexCode
-                    });
+                        colors.Add(new ProductColorViewModel()
+                        {
+                            ColorId = oProduct.colorId,
+                            IsActive = isActive,
+                            Title = oProduct.Title,
+                            Code = oProduct.Code,
+                            HexCode = oProduct.HexCode
+                        });
+                    }
                 }
             }
 
