@@ -200,7 +200,7 @@ function finalizeOrder() {
                     notes: orderNotes, cellnumber: cellnumber, postal: postalCode, address: address,
                     city: city, fullname: fullname
                 },
-                type: "GET"
+                type: "POST"
             }).done(function (result) {
                 if (result.includes('nonstock')) {
                     var products = result.split('|');
@@ -231,10 +231,33 @@ function finalizeOrder() {
                     postRefId(refffid);
                 }
 
+                else if (result.includes('falsecatch')) {
+                  
+                    $('#error-box').css('display', 'block');
+                    $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
+                    console.log(result);
+                    $('#success-checkout-box').css('display', 'none');
+
+                    AppearButton();
+
+                }
+
+                else if (result.includes('false')) {
+                  
+                    $('#error-box').css('display', 'block');
+                    $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
+                    console.log(result);
+                    $('#success-checkout-box').css('display', 'none');
+
+                    AppearButton();
+
+                }
+
                 else {
                     $('#error-box').css('display', 'block');
                     $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
                     $('#success-checkout-box').css('display', 'none');
+                    console.log(result);
 
                     AppearButton();
 

@@ -382,79 +382,78 @@ namespace MashadCarpetShop.Controllers
             return Json(cityItems, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult Finalize(string notes, string cellnumber, string postal,
-                                    string address, string city, string fullname)
+            string address, string city, string fullname)
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
-
-                string name = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
-
-                Guid userId = new Guid(name);
-
-                List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
-
-                if (productInCarts.Count == 0)
+                if (User.Identity.IsAuthenticated)
                 {
-                    return Json("emptyBasket", JsonRequestBehavior.AllowGet);
+                    var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+
+                    string name = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+
+                    Guid userId = new Guid(name);
+
+                    List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
+
+                    if (productInCarts.Count == 0)
+                    {
+                        return Json("emptyBasket", JsonRequestBehavior.AllowGet);
+                    }
+                    Order order = ConvertCoockieToOrder(productInCarts);
+
+                    if (order != null)
+                    {
+                        order.UserId = userId;
+                        order.DeliverFullName = fullname;
+                        order.DeliverCellNumber = cellnumber;
+                        order.Address = address;
+                        order.PostalCode = postal;
+                        order.CustomerDesc = notes;
+                        order.CityId = new Guid(city);
+
+                        decimal totalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
+                        order.TotalAmount = totalAmount;
+
+                        db.SaveChanges();
+
+                        string res = "";
+                        string uniqueOrderId = GetUniqueOrderId(order.Id);
+
+                        string log = PayRequest(order.Id, uniqueOrderId,
+                            totalAmount * 10);
+
+                        if (!log.Contains("false"))
+                        {
+                            return Json("true-" + log, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json("bankerror|" + log.Split('-')[1], JsonRequestBehavior.AllowGet);
+                        }
+
+                        //if (paymentType == "online")
+                        //    res = zp.ZarinPalRedirect(order, order.TotalAmount);
+
+                        //else
+                        //{
+
+
+                        //    res = "notonline";
+
+                        //    User user = db.Users.Find(userId);
+                        //   string smsCellnumber = cellnumber;
+                        //    if (user != null)
+                        //        smsCellnumber = user.CellNum;
+                        //    SendSms.SendCommonSms(smsCellnumber, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
+
+                        //}
+
+                    }
 
                 }
-                Order order = ConvertCoockieToOrder(productInCarts);
-
-                if (order != null)
-                {
-                    order.UserId = userId;
-                    order.DeliverFullName = fullname;
-                    order.DeliverCellNumber = cellnumber;
-                    order.Address = address;
-                    order.PostalCode = postal;
-                    order.CustomerDesc = notes;
-                    order.CityId = new Guid(city);
-
-                    decimal totalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
-                    order.TotalAmount = totalAmount;
-
-
-
-                    db.SaveChanges();
-
-                    string res = "";
-                    string uniqueOrderId = GetUniqueOrderId(order.Id);
-
-                    string log = PayRequest(order.Id, uniqueOrderId,
-                        totalAmount * 10);
-
-                    if (!log.Contains("false"))
-                    {
-                        return Json("true-" + log, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
-                        return Json("bankerror|" + log.Split('-')[1], JsonRequestBehavior.AllowGet);
-                    }
-
-                    //if (paymentType == "online")
-                    //    res = zp.ZarinPalRedirect(order, order.TotalAmount);
-
-                    //else
-                    //{
-                 
-
-                    //    res = "notonline";
-
-                    //    User user = db.Users.Find(userId);
-                    //   string smsCellnumber = cellnumber;
-                    //    if (user != null)
-                    //        smsCellnumber = user.CellNum;
-                    //    SendSms.SendCommonSms(smsCellnumber, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
-
-                    //}
-
-                }
-                //   }
 
                 return Json("false", JsonRequestBehavior.AllowGet);
 

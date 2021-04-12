@@ -225,6 +225,7 @@ namespace MashadCarpetShop.Controllers
                 Product oProductWithColor =
                     CreateProduct(null, color, colorTitle, designNo, tedadrang, shane, tarakom, amount);
 
+                if(oProductWithColor!=null)
                 CreateProductSize(realSize, qty, amount, oProductWithColor);
             }
         }
