@@ -295,8 +295,8 @@ namespace MashadCarpetShop.Controllers
         [Route("carpet-online-shopping/{groupUrlParam}/{code:int}")]
         public ActionResult Details(string groupUrlParam, int code, Guid? productSizeId)
         {
-
             ProductSize productSize = new ProductSize();
+
             Product product = db.Products.FirstOrDefault(c => c.Code == code && c.IsDeleted == false);
 
             if (product == null)
@@ -308,12 +308,12 @@ namespace MashadCarpetShop.Controllers
             if (productSizeId == null)
             {
                 productSize =
-                   db.ProductSizes.Where(c => c.ProductId == product.Id).OrderBy(c => c.Amount).FirstOrDefault();
+                   db.ProductSizes.Where(c => c.ProductId == product.Id&&c.IsActive).OrderBy(c => c.Amount).FirstOrDefault();
             }
             else
             {
                 productSize =
-                    db.ProductSizes.FirstOrDefault(c => c.Id == productSizeId.Value);
+                    db.ProductSizes.FirstOrDefault(c => c.Id == productSizeId.Value && c.IsActive);
             }
 
             ProductDetailViewModel result = new ProductDetailViewModel()

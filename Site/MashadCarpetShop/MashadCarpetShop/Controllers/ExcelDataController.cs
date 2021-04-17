@@ -67,6 +67,10 @@ namespace MashadCarpetShop.Controllers
 
                         if (colorValidate)
                         {
+                            DeactivProducts();
+                            db.SaveChanges();
+
+
                             foreach (var row in WorkSheet.RowsUsed())
                             {
 
@@ -74,12 +78,8 @@ namespace MashadCarpetShop.Controllers
                                 int tedadRang = Convert.ToInt32(row.Cell(5).Value.ToString());
                                 int amount = Convert.ToInt32(row.Cell(7).Value.ToString());
                                 int qty = Convert.ToInt32(row.Cell(8).Value.ToString());
-
-                                if (designNo == 802001)
-                                {
-                                    int test = 1;
-                                }
-
+                                 
+                              
                                 UpdateRow(designNo,
                                     row.Cell(2).Value.ToString(),
                                     row.Cell(3).Value.ToString(),
@@ -122,6 +122,27 @@ namespace MashadCarpetShop.Controllers
                 }
             }
             return View();
+        }
+
+        public void DeactivProducts()
+        {
+            var products = db.Products.Where(v => v.IsActive && v.IsDeleted == false);
+
+            foreach (var product in products)
+            {
+                product.IsActive = false;
+                product.IsAvailable = false;
+                product.LastModifiedDate=DateTime.Now;
+            }
+
+            var productSizes = db.ProductSizes.Where(c => c.IsActive && c.IsAvailable);
+
+            foreach (var productSize in productSizes)
+            {
+                productSize.IsActive = false;
+                productSize.IsAvailable = false;
+                productSize.LastModifiedDate = DateTime.Now;
+            }
         }
 
         public void InsertExcellHistory(UploadFile UploadFile)
@@ -188,12 +209,18 @@ namespace MashadCarpetShop.Controllers
 
             if (product != null)
             {
+                product.IsAvailable = true;
+                product.IsActive = true;
+
                 Product productWithColor =
                     db.Products.FirstOrDefault(c =>
                         c.DesignNo == designNo && c.IsDeleted == false && c.Color.Title == colorTitle);
 
                 if (productWithColor != null)
                 {
+                    productWithColor.IsAvailable = true;
+                    productWithColor.IsActive = true;
+                    
                     ProductSize productSize = db.ProductSizes.FirstOrDefault(c =>
                         c.ProductId == productWithColor.Id && c.IsDeleted == false && c.Size.Title == realSize);
 
@@ -202,6 +229,8 @@ namespace MashadCarpetShop.Controllers
                         productSize.Amount = amount;
                         productSize.Stock = qty;
                         productSize.LastModifiedDate = DateTime.Now;
+                        productSize.IsAvailable = true;
+                        productSize.IsActive = true;
 
                         if (productWithColor.Amount == 0 || productWithColor.Amount > productSize.Amount)
                             productWithColor.Amount = amount;
