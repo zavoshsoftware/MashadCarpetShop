@@ -214,13 +214,13 @@ namespace MashadCarpetShop.Controllers
 
                 Product productWithColor =
                     db.Products.FirstOrDefault(c =>
-                        c.DesignNo == designNo && c.IsDeleted == false && c.Color.Title == colorTitle);
+                        c.DesignNo == designNo &&c.ParentId!=null&& c.IsDeleted == false && c.Color.Title == colorTitle);
 
                 if (productWithColor != null)
                 {
                     productWithColor.IsAvailable = true;
                     productWithColor.IsActive = true;
-                    
+
                     ProductSize productSize = db.ProductSizes.FirstOrDefault(c =>
                         c.ProductId == productWithColor.Id && c.IsDeleted == false && c.Size.Title == realSize);
 

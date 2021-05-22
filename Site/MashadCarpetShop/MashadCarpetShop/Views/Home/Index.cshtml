@@ -58,19 +58,30 @@
 <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
 		<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active background_bg" data-img-src="/assets/images/banner1.jpg" onclick="window.location.href='/pro';">
-					<div class="banner_slide_content">
-					</div>
-				</div>
-				<div class="carousel-item background_bg" data-img-src="/assets/images/banner2.jpg" onclick="window.location.href='/pro';">
-					<div class="banner_slide_content">
-					</div>
-				</div>
-				<div class="carousel-item background_bg" data-img-src="/assets/images/banner3.jpg" onclick="window.location.href='/pro';">
-					<div class="banner_slide_content">
-					</div>
-				</div>
-		 
+				@{
+						int i = 0;
+						foreach (var slider in Model.Sliders)
+						{
+							if (i == 0)
+							{
+								<div class="carousel-item active background_bg" data-img-src="@slider.ImageUrl" onclick="window.location.href = '@slider.LandingPage';">
+									<div class="banner_slide_content">
+									</div>
+								</div>
+							}
+							else
+							{
+								<div class="carousel-item background_bg" data-img-src="@slider.ImageUrl" onclick="window.location.href = '@slider.LandingPage';">
+									<div class="banner_slide_content">
+									</div>
+								</div>
+							}
+							i++;
+						}
+				}
+			
+		
+			 
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"><i class="ion-chevron-left"></i></a>
 			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"><i class="ion-chevron-right"></i></a>

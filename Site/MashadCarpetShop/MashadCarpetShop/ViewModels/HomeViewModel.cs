@@ -12,6 +12,7 @@ namespace ViewModels
         public List<ProductCardViewModel> NewestProducts { get; set; }
         public List<ProductGroup> ProductGroups { get; set; }
         public List<Blog> Blogs { get; set; }
+        public List<Slider> Sliders { get; set; }
     }
 
 }

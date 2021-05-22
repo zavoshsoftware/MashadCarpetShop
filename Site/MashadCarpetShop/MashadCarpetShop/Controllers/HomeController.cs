@@ -19,7 +19,9 @@ namespace MashadCarpetShop.Controllers
                 TopProducts = GetProductCardByProducts(db.Products.Where(c=>c.IsInHome&&c.IsDeleted==false&&c.IsActive&&c.ParentId!=null).Take(8).ToList()),
                 NewestProducts = GetProductCardByProducts(db.Products.Where(c=>c.IsInHome&&c.IsDeleted==false&&c.IsActive && c.ParentId != null).OrderByDescending(c=>c.CreationDate).Take(8).ToList()),
                 ProductGroups = db.ProductGroups.Where(c=>c.IsDeleted==false&&c.IsActive).OrderBy(c=>c.Order).ToList(),
-                Blogs = db.Blogs.Where(c=>c.IsDeleted==false&&c.IsActive).OrderByDescending(c=>c.CreationDate).Take(3).ToList()
+                Blogs = db.Blogs.Where(c=>c.IsDeleted==false&&c.IsActive).OrderByDescending(c=>c.CreationDate).Take(3).ToList(),
+                Sliders = db.Sliders.Where(c=>c.IsDeleted==false&&c.IsActive).OrderBy(c=>c.Order).Take(3).ToList(),
+               
             };
             return View(result);
         }

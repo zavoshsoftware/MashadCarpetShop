@@ -297,7 +297,8 @@ namespace MashadCarpetShop.Controllers
         {
             ProductSize productSize = new ProductSize();
 
-            Product product = db.Products.FirstOrDefault(c => c.Code == code && c.IsDeleted == false);
+            Product product =
+                db.Products.FirstOrDefault(c => c.Code == code && c.IsDeleted == false && c.ParentId != null);
 
             if (product == null)
                 return Redirect("/carpet-online-shopping");
